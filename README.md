@@ -2,6 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.3.
 
+## PokeApi
+
+Using the (PokeApi V2)[https://pokeapi.co/docs/v2].
+
+In Assets have a insomnia JSON with requests.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
