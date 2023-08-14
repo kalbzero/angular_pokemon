@@ -112,7 +112,7 @@ interface GenerationVIII {
     icons: Front_Female,
 }
 
-interface Versions { // FIXME
+export interface Versions {
     'generation-i': GenerationI,
     'generation-ii': GenerationII,
     'generation-iii': GenerationIII,

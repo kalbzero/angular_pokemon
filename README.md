@@ -10,6 +10,8 @@ In Assets have a insomnia JSON with requests.
 
 ## Development server
 
+Run `npm i --legacy-peer-deps`, because the Bootstrap and PrimeNg are v15 and Angular/Cli is v16.
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding

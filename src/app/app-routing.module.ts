@@ -9,7 +9,7 @@ const routes: Routes = [
     component: ListComponent
   },
   {
-    path: 'view/:id',
+    path: 'pokemon/:id',
     component: ViewComponent
   }
 ];
