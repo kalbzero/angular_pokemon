@@ -48,7 +48,10 @@ export class ListComponent implements OnInit, OnDestroy {
 
           this.loading = false;
         },
-        error: (error) => { console.error(error) }
+        error: (error) => { 
+          console.error(error); 
+          this.loading = false;
+        }
       })
   }
 

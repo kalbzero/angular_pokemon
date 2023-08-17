@@ -124,13 +124,13 @@ export interface Versions {
 }
 
 export interface Sprite {
-    back_default: string,
+    back_default: null | string,
     back_female: null | string,
-    back_shiny: string,
+    back_shiny: null | string,
     back_shiny_female: null | string,
-    front_default: string,
+    front_default: null | string,
     front_female: null | string,
-    front_shiny: string,
+    front_shiny: null | string,
     front_shiny_female: null | string,
     other: Other,
     versions: Versions

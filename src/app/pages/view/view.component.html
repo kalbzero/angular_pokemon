@@ -1,8 +1,47 @@
 <h1 class="text-center mt-1 mb-1">Pokémon Infos</h1>
 <div class="container">
     <div class="row">
-        <div class="col-md-3 col-sd-12">
-            <span>{{pokemon.name}}</span> is a <span>{{types_pokemon}}</span> type Pokémon introduced in 
+        <div class="col-md-4 col-sd-12">
+            <h6>Data</h6>
+            <p>
+                <span class="pokemon-name">{{pokemon.name}}</span> is a <span class="font-bold" [innerHTML]="types_pokemon"></span> 
+                type Pokémon introduced in <span class="font-bold"> {{first_generation_founded}}</span> 
+                with height <span class="font-bold">{{pokemon.height_converted}}</span>, weight 
+                <span class="font-bold">{{pokemon.weight_converted}}</span> and 
+                base experience <span class="font-bold">{{pokemon.base_experience}}</span>.
+            </p>
+            <h6>Base Stats</h6>
+            <ul>
+                <li *ngFor="let stats of pokemon.stats"> {{stats.stat.name}} : {{stats.base_stat}} </li>
+            </ul>
+        </div>
+        <div class="col-md-4 col-sd-12">
+            <h6>Sprites</h6>
+            <p-carousel [value]="imageUrls" [numVisible]="1" [numScroll]="1" [circular]="true" >
+                <ng-template let-url pTemplate="item">
+                    <div class="mb-3">
+                        <img [src]="url" alt="Pokémon Image" />
+                    </div>
+                </ng-template>
+            </p-carousel>
+        </div>
+        <div class="col-md-4 col-sd-12">
+            <h6>Abilities</h6>
+            <ul>
+                <li *ngFor="let ab of pokemon.abilities"> {{ab.ability.name}} <span *ngIf="ab.is_hidden === true" class="font-bold">(Hidden Ability)</span></li>
+            </ul>
+            <h6>Version Game Index</h6>
+            <ul>
+                <li *ngFor="let gi of pokemon.game_indices"> {{gi.version.name}} </li>
+            </ul>
+        </div>
+        <div class="col-12">
+            <h6>Moves</h6> <!-- table -->
+            <ul>
+                <li *ngFor="let moves of pokemon.moves"> <span class="pokemon-name">{{moves.move.name}}</span> - Level Learned: <span class="font-bold">{{moves.version_group_details[0].level_learned_at}}</span> - ({{moves.version_group_details[0].move_learn_method.name}}) - Versions: <span *ngFor="let vgd of moves.version_group_details"> {{vgd.version_group.name}} </span></li>
+            </ul>
         </div>
     </div>
 </div>
+
+<!-- https://pokemondb.net/pokedex/bulbasaur#dex-basics -->

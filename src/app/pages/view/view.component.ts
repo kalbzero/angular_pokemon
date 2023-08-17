@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, Version } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { Pokemon } from 'src/app/interfaces/pokemon';
-import { Versions } from 'src/app/interfaces/sprite';
+import { Sprite, Versions } from 'src/app/interfaces/sprite';
 import { Types } from 'src/app/interfaces/types';
 import { PokeapiService } from 'src/app/services/pokeapi.service';
 
@@ -20,18 +20,19 @@ export class ViewComponent implements OnInit, OnDestroy {
   // Auxiliars
   public types_pokemon: string = '';
   public first_generation_founded: string = '';
-  
+  public imageUrls: any[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private pokeapiService: PokeapiService
-  ) { 
+  ) {
     this.id_pokemon = this.route.snapshot.params['id'];
   }
 
   ngOnInit(): void {
-    if(this.id_pokemon !== '') {
+    if (this.id_pokemon !== '') {
       this.getPokemonByID();
-    } 
+    }
   }
 
   ngOnDestroy(): void {
@@ -44,12 +45,12 @@ export class ViewComponent implements OnInit, OnDestroy {
    * @param types return string with types of pokemon
    */
   private joinTypes(types: Types[]): void {
-    if(types.length > 1) {
+    if (types.length > 1) {
       types.forEach((t, i) => {
-        if(i == 0) {
-          this.types_pokemon = t.type.name;
+        if (i == 0) {
+          this.types_pokemon = `<span class="${t.type.name}">${t.type.name}</span>`
         } else {
-          this.types_pokemon += ` | ${t.type.name}`
+          this.types_pokemon += ` | <span class="${t.type.name}">${t.type.name}</span>`
         }
       })
     } else {
@@ -77,6 +78,31 @@ export class ViewComponent implements OnInit, OnDestroy {
     }
   }
 
+  private convertHeight(height: number): string {
+    const meters = height / 10; // Coverting to meters
+    const feet = Math.floor(meters * 3.281); // converting to feet (1 meter = 3.281 feet)
+    const inches = Math.round((meters * 3.281 - feet) * 12); // Converting to inches
+
+    return `${meters.toFixed(1)}m (${feet}'${inches}")`;
+  }
+
+  private convertWeight(weight: number) {
+    const kg = weight / 10; // Coverting to Kg
+    const lbs = Math.round(kg * 2.20462); // Coverting to lbs (1 kg = 2.20462 lbs)
+
+    return `${kg.toFixed(1)} kg (${lbs.toFixed(1)} lbs)`
+  }
+
+  private arraySprites(sprites: any): void {
+    for (const key in sprites) {
+      const url: any = sprites[key];
+      if (url !== null && typeof url !== 'object') {
+        this.imageUrls.push(url)
+      }
+    }
+    console.log(this.imageUrls)
+  }
+
   private getPokemonByID(): void {
     this.pokeapiService.getPokemonByID(this.id_pokemon)
       .pipe(takeUntil(this.unsubscribe$))
@@ -85,6 +111,10 @@ export class ViewComponent implements OnInit, OnDestroy {
           this.pokemon = pokemon;
           this.joinTypes(pokemon.types);
           this.findOutFirstGeneration(pokemon.sprites.versions);
+          pokemon.height_converted = this.convertHeight(pokemon.height);
+          pokemon.weight_converted = this.convertWeight(pokemon.weight);
+          this.arraySprites(pokemon.sprites);
+
         }
       });
   }

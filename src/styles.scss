@@ -30,6 +30,10 @@
     color: $white;
 }
 
+.font-bold {
+    font-weight: bold;
+}
+
 .logo-color {
     color: $logo_yellow;
     font-family: 'Pokemon Solid', sans-serif;
@@ -42,8 +46,15 @@
         -3px 3px 0 $logo_blue_light,
         3px 3px 0 $logo_blue_light;
 }
+/* Type colors */
+.grass {
+    color:#7c5;
+}
+.poison {
+    color: #a59;
+}
 
-// Rewrite PrimeNg CSS
+/* Rewrite PrimeNg CSS */
 .p-button {
     color: $white;
     background: $red;
