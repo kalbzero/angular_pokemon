@@ -4,10 +4,11 @@
         <div class="col-md-4 col-sd-12">
             <h6>Data</h6>
             <p>
-                <span class="pokemon-name">{{pokemon.name}}</span> is a <span class="font-bold" [innerHTML]="types_pokemon"></span> 
-                type Pokémon introduced in <span class="font-bold"> {{first_generation_founded}}</span> 
-                with height <span class="font-bold">{{pokemon.height_converted}}</span>, weight 
-                <span class="font-bold">{{pokemon.weight_converted}}</span> and 
+                <span class="pokemon-name">{{pokemon.name}}</span> is a <span class="font-bold"
+                    [innerHTML]="types_pokemon"></span>
+                type Pokémon introduced in <span class="font-bold"> {{first_generation_founded}}</span>
+                with height <span class="font-bold">{{pokemon.height_converted}}</span>, weight
+                <span class="font-bold">{{pokemon.weight_converted}}</span> and
                 base experience <span class="font-bold">{{pokemon.base_experience}}</span>.
             </p>
             <h6>Base Stats</h6>
@@ -17,18 +18,13 @@
         </div>
         <div class="col-md-4 col-sd-12">
             <h6>Sprites</h6>
-            <p-carousel [value]="imageUrls" [numVisible]="1" [numScroll]="1" [circular]="true" >
-                <ng-template let-url pTemplate="item">
-                    <div class="mb-3">
-                        <img [src]="url" alt="Pokémon Image" />
-                    </div>
-                </ng-template>
-            </p-carousel>
+            
         </div>
         <div class="col-md-4 col-sd-12">
             <h6>Abilities</h6>
             <ul>
-                <li *ngFor="let ab of pokemon.abilities"> {{ab.ability.name}} <span *ngIf="ab.is_hidden === true" class="font-bold">(Hidden Ability)</span></li>
+                <li *ngFor="let ab of pokemon.abilities"> {{ab.ability.name}} <span *ngIf="ab.is_hidden === true"
+                        class="font-bold">(Hidden Ability)</span></li>
             </ul>
             <h6>Version Game Index</h6>
             <ul>
@@ -36,10 +32,79 @@
             </ul>
         </div>
         <div class="col-12">
-            <h6>Moves</h6> <!-- table -->
-            <ul>
-                <li *ngFor="let moves of pokemon.moves"> <span class="pokemon-name">{{moves.move.name}}</span> - Level Learned: <span class="font-bold">{{moves.version_group_details[0].level_learned_at}}</span> - ({{moves.version_group_details[0].move_learn_method.name}}) - Versions: <span *ngFor="let vgd of moves.version_group_details"> {{vgd.version_group.name}} </span></li>
-            </ul>
+            <h6><span class="pokemon-name">{{pokemon.name}}'s</span> Moves</h6> <!-- table -->
+            <!-- <ul>
+                <li *ngFor="let moves of pokemon.moves"> <span class="pokemon-name">{{moves.move.name}}</span> - Level
+                    Learned: <span class="font-bold">{{moves.version_group_details[0].level_learned_at}}</span> -
+                    ({{moves.version_group_details[0].move_learn_method.name}}) - Versions: <span
+                        *ngFor="let vgd of moves.version_group_details"> {{vgd.version_group.name}} </span></li>
+            </ul> -->
+            <p-table #dt1 [value]="pokemon.moves" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [globalFilterFields]="['move.name', 'move.vgd_level_learned_at', 'move.vgd_move_learn_method', 'move.vgd_version_group']">
+                <ng-template pTemplate="caption">
+                    <div class="flex">
+                        <span class="p-input-icon-left ml-auto">
+                            <input pInputText type="text" (input)="filterMoves($event)"
+                                placeholder="Search move by name" />
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="min-width:15rem">
+                            <div class="flex align-items-center">
+                                Name
+                            </div>
+                        </th>
+
+                        <th style="min-width:15rem">
+                            <div class="flex align-items-center">
+                                Level Learned
+                            </div>
+                        </th>
+
+                        <th style="min-width:15rem">
+                            <div class="flex align-items-center">
+                                Move Learn Method
+                            </div>
+                        </th>
+
+                        <th style="min-width:15rem">
+                            <div class="flex align-items-center">
+                                Versions
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-moves>
+                    <tr>
+                        <td>
+                            {{ moves.move.name }}
+                        </td>
+                        <td>
+                            <p *ngFor="let vgd of moves.version_group_details">
+                                <span > {{vgd.level_learned_at}} </span>
+                            </p>
+                            
+                        </td>
+                        <td>
+                            <p *ngFor="let vgd of moves.version_group_details">
+                                <span> {{vgd.move_learn_method.name}} </span>
+                            </p>
+                            
+                        </td>
+                        <td>
+                            <p *ngFor="let vgd of moves.version_group_details">
+                                <span> {{vgd.version_group.name}} </span>
+                            </p>
+                            
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit, Version } from '@angular/core';
+import { Component, OnDestroy, OnInit, Version, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Table } from 'primeng/table';
 import { Subject, takeUntil } from 'rxjs';
 import { Pokemon } from 'src/app/interfaces/pokemon';
 import { Sprite, Versions } from 'src/app/interfaces/sprite';
@@ -16,11 +17,11 @@ export class ViewComponent implements OnInit, OnDestroy {
   private id_pokemon: string = '';
   public pokemon: Pokemon = {} as Pokemon;
   private unsubscribe$ = new Subject<void>();
+  @ViewChild('dt1') dt1: Table = {} as Table;
 
   // Auxiliars
   public types_pokemon: string = '';
   public first_generation_founded: string = '';
-  public imageUrls: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -93,16 +94,6 @@ export class ViewComponent implements OnInit, OnDestroy {
     return `${kg.toFixed(1)} kg (${lbs.toFixed(1)} lbs)`
   }
 
-  private arraySprites(sprites: any): void {
-    for (const key in sprites) {
-      const url: any = sprites[key];
-      if (url !== null && typeof url !== 'object') {
-        this.imageUrls.push(url)
-      }
-    }
-    console.log(this.imageUrls)
-  }
-
   private getPokemonByID(): void {
     this.pokeapiService.getPokemonByID(this.id_pokemon)
       .pipe(takeUntil(this.unsubscribe$))
@@ -113,9 +104,24 @@ export class ViewComponent implements OnInit, OnDestroy {
           this.findOutFirstGeneration(pokemon.sprites.versions);
           pokemon.height_converted = this.convertHeight(pokemon.height);
           pokemon.weight_converted = this.convertWeight(pokemon.weight);
-          this.arraySprites(pokemon.sprites);
+          pokemon.moves.forEach(move => {
+            move.vgd_level_learned_at = '';
+            move.vgd_move_learn_method = '';
+            move.vgd_version_group = '';
+            move.version_group_details.forEach(vgd => {
+              move.vgd_version_group += `${vgd.version_group.name} `;
+              move.vgd_level_learned_at += `${vgd.level_learned_at} `;
+              move.vgd_move_learn_method += `${vgd.move_learn_method.name} `;
+            })
+          })
 
         }
       });
   }
+
+  public filterMoves(event: any): void {
+    console.log(event.target.value);
+    this.dt1.filterGlobal(event.target.value, 'contains');
+  }
+
 }
