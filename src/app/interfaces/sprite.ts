@@ -59,6 +59,7 @@ interface Front_Shiny_Female {
 
 interface Official_Artwork {
     front_default: string,
+    front_shiny: string
 }
 
 interface Other {

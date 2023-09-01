@@ -15,13 +15,42 @@ import { PokeapiService } from 'src/app/services/pokeapi.service';
 export class ViewComponent implements OnInit, OnDestroy {
 
   private id_pokemon: string = '';
-  public pokemon: Pokemon = {} as Pokemon;
+  public pokemon: Pokemon = {
+        sprites: {
+          back_default: '',
+          back_female: '',
+          back_shiny: '',
+          back_shiny_female: '',
+          front_default: '',
+          front_female: '',
+          front_shiny: '',
+          front_shiny_female: '',
+          other: {
+            dream_world: {
+              front_default: '',
+              front_female: ''
+            },
+            home: {
+              front_default: '',
+              front_female: '',
+              front_shiny: '',
+              front_shiny_female: ''
+            },
+            'official-artwork': {
+              front_default: '',
+              front_shiny: ''
+            }
+          }
+        }     
+  } as Pokemon;
   private unsubscribe$ = new Subject<void>();
   @ViewChild('dt1') dt1: Table = {} as Table;
 
   // Auxiliars
   public types_pokemon: string = '';
   public first_generation_founded: string = '';
+  public official_artwork_default: string = '';
+  public official_artwork_shiny: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -114,7 +143,8 @@ export class ViewComponent implements OnInit, OnDestroy {
               move.vgd_move_learn_method += `${vgd.move_learn_method.name} `;
             })
           })
-
+          this.official_artwork_default = pokemon.sprites.other['official-artwork'].front_default || 'assets/img/pokeball.png';
+          this.official_artwork_shiny = pokemon.sprites.other['official-artwork'].front_shiny || 'assets/img/pokeball.png';
         }
       });
   }
