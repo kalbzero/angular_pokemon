@@ -13,76 +13,76 @@
         </div>
         <div class="col-12 mb-5 mt-3">
             <h6 class="text-center">Sprites</h6>
-            <div class="row">
-                <div class="col-md-2">
+            <div class="row text-center">
+                <div class="col-md-2 border">
                     <p>Front default</p>
                     <img [src]="pokemon.sprites.front_default ? pokemon.sprites.front_default : 'assets/img/pokeball.png'" alt="Front Default" width="96" height="96">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 border">
                     <p>Back default</p>
                     <img [src]="pokemon.sprites.back_default ? pokemon.sprites.back_default : 'assets/img/pokeball.png'" alt="Back Default" width="96" height="96">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 border">
                     <p>Front Female</p>
                     <img [src]="pokemon.sprites.front_female ? pokemon.sprites.front_female : 'assets/img/pokeball.png' " alt="Front Female" width="96" height="96">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 border">
                     <p>Back Female</p>
                     <img [src]="pokemon.sprites.back_female ? pokemon.sprites.back_female : 'assets/img/pokeball.png' " alt="Back Female" width="96" height="96">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 border">
                     <p>Front Shiny</p>
                     <img [src]="pokemon.sprites.front_shiny ? pokemon.sprites.front_shiny : 'assets/img/pokeball.png'" alt="Front Shiny" width="96" height="96">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 border">
                     <p>Front Shiny Female</p>
                     <img [src]="pokemon.sprites.front_shiny_female ? pokemon.sprites.front_shiny_female : 'assets/img/pokeball.png'" alt="Front Shiny Female" width="96" height="96">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 border">
                     <p>Back Shiny</p>
                     <img [src]="pokemon.sprites.back_shiny ? pokemon.sprites.back_shiny : 'assets/img/pokeball.png'" alt="Back Shiny" width="96" height="96">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 border">
                     <p>Back Shiny Female</p>
                     <img [src]="pokemon.sprites.back_shiny_female ? pokemon.sprites.back_shiny_female : 'assets/img/pokeball.png'" alt="Back Shiny Female" width="96" height="96">
                 </div>
                 
                 
-                <div class="col-md-2">
+                <div class="col-md-2 border">
                     <p>Dream World</p>
                     <img [src]="pokemon.sprites.other.dream_world.front_default ? pokemon.sprites.other.dream_world.front_default : 'assets/img/pokeball.png'" alt="Dream World" width="96" height="96">
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-2 border">
                     <p>Dream World Female</p>
                     <img [src]="pokemon.sprites.other.dream_world.front_female ? pokemon.sprites.other.dream_world.front_female : 'assets/img/pokeball.png'" alt="Dream World Female" width="96" height="96">
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-2 border">
                     <p>Home</p>
                     <img [src]="pokemon.sprites.other.home.front_default ? pokemon.sprites.other.home.front_default : 'assets/img/pokeball.png'" alt="Home" width="96" height="96">
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-2 border">
                     <p>Home Female</p>
                     <img [src]="pokemon.sprites.other.home.front_female ? pokemon.sprites.other.home.front_female : 'assets/img/pokeball.png'" alt="Home Female" width="96" height="96">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 offset-md-2 border">
                     <p>Home Shiny</p>
                     <img [src]="pokemon.sprites.other.home.front_shiny ? pokemon.sprites.other.home.front_shiny : 'assets/img/pokeball.png'" alt="Home Shiny" width="96" height="96">
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-2 border">
                     <p>Home Shiny Female</p>
                     <img [src]="pokemon.sprites.other.home.front_shiny_female ? pokemon.sprites.other.home.front_shiny_female : 'assets/img/pokeball.png'" alt="Home Shiny Female" width="96" height="96">
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-2 border">
                     <p>Offical Network</p>
                     <img [src]="official_artwork_default" alt="Offical Network" width="96" height="96">
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-2 border">
                     <p>Offical Network Shiny</p>
                     <img [src]="official_artwork_shiny" alt="Offical Network Shiny" width="96" height="96">
                 </div>
@@ -113,7 +113,7 @@
             <p-table #dt1 [value]="pokemon.moves" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
                 [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                [globalFilterFields]="['move.name']" dataKey="name" [rowExpandMode]="'single'">
+                [globalFilterFields]="['move.name']" dataKey="name">
                 <ng-template pTemplate="caption">
                     <div class="flex">
                         <span class="p-input-icon-left ml-auto">
@@ -124,10 +124,9 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th style="width: 5rem"></th>
                         <th style="min-width:15rem">
                             <div class="flex align-items-center">
-                                Name
+                                Move
                             </div>
                         </th>
 
@@ -150,12 +149,9 @@
                         </th>
                     </tr>
                 </ng-template>
-                <!-- https://primeng.org/table -->
-                <ng-template pTemplate="body" let-moves let-expanded="expanded">
+                <ng-template pTemplate="body" let-moves>
                     <tr dataKey="id">
-                        <td>
-                            <button type="button" pButton pRipple [pRowToggler]="moves" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-                        </td>
+                        
                         <td>
                             <span class="font-bold">{{ moves.move.name }}</span>
                         </td>
@@ -176,13 +172,6 @@
                                 <span> {{vgd.version_group.name}} </span>
                             </p>
                             
-                        </td>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="rowexpansion" let-moves>
-                    <tr>
-                        <td>
-                            Hello
                         </td>
                     </tr>
                 </ng-template>
