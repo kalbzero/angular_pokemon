@@ -84,7 +84,7 @@ export class ViewComponent implements OnInit, OnDestroy {
         }
       })
     } else {
-      this.types_pokemon = types[0].type.name;
+      this.types_pokemon = `<span class="${types[0].type.name}">${types[0].type.name}</span>`;
     }
   }
 
