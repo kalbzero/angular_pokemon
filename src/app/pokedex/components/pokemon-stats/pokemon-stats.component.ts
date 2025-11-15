@@ -9,5 +9,5 @@ import { TitleCasePipe } from '@angular/common';
   styleUrl: './pokemon-stats.component.scss'
 })
 export class PokemonStatsComponent {
-  @Input() pokemon!: IPokemon;
+  @Input() pokemon: IPokemon | undefined;
 }

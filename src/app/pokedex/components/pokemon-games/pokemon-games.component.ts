@@ -8,5 +8,5 @@ import { IPokemon } from '../../../shared/interfaces/IPokemon';
   styleUrl: './pokemon-games.component.scss'
 })
 export class PokemonGamesComponent {
-  @Input() pokemon!: IPokemon;
+  @Input() pokemon: IPokemon | undefined;
 }

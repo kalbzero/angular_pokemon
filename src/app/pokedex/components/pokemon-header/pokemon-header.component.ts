@@ -9,5 +9,5 @@ import { IPokemon } from '../../../shared/interfaces/IPokemon';
   templateUrl: './pokemon-header.component.html',
 })
 export class PokemonHeaderComponent {
-  @Input() pokemon!: IPokemon;
+  @Input() pokemon: IPokemon | undefined;
 }

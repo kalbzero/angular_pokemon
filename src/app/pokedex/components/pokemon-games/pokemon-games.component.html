@@ -1,7 +1,7 @@
 <section>
   <h3>Games</h3>
   <ul>
-    @for (g of pokemon.game_indices; track $index) {
+    @for (g of pokemon!.game_indices; track $index) {
     <li>{{ g.version.name }}</li>
     }
   </ul>

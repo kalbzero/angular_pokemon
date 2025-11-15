@@ -1,7 +1,7 @@
 <section>
   <h3>Habilidades</h3>
   <ul>
-    @for (h of pokemon.abilities; track $index) {
+    @for (h of pokemon!.abilities; track $index) {
     <li>
       {{ h.ability.name | titlecase }}
       @if (h.is_hidden) {

@@ -29,7 +29,7 @@ import { PokemonGamesComponent } from '../pokemon-games/pokemon-games.component'
   styleUrls: ['./pokemon-card.component.scss'],
 })
 export class PokemonCardComponent {
-  @Input() pokemon!: IPokemon;
+  @Input() pokemon: IPokemon | undefined;
   pokemonStore = inject(PokemonStore);
 
   typeData = computed(() => this.pokemonStore.typeData());

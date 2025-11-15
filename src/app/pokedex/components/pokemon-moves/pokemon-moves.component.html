@@ -2,12 +2,12 @@
   <h3>Movimentos</h3>
 
   <ul>
-    @for (m of pokemon.moves.slice(0, 10); track $index) {
+    @for (m of pokemon!.moves.slice(0, 10); track $index) {
     <li>{{ m.move.name | titlecase }}</li>
     }
 
-    @if (pokemon.moves.length > 10) {
-    <li>… e mais {{ pokemon.moves.length - 10 }}</li>
+    @if (pokemon!.moves.length > 10) {
+    <li>… e mais {{ pokemon!.moves.length - 10 }}</li>
     }
   </ul>
 </section>

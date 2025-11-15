@@ -1,7 +1,7 @@
 <section>
   <h3>Tipos</h3>
   <ul>
-    @for (t of pokemon.types; track $index) {
+    @for (t of pokemon!.types; track $index) {
     <li>{{ t.type.name | titlecase }}</li>
     }
   </ul>

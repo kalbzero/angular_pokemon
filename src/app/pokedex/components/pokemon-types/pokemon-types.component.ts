@@ -9,5 +9,5 @@ import { IPokemon } from '../../../shared/interfaces/IPokemon';
   templateUrl: './pokemon-types.component.html',
 })
 export class PokemonTypesComponent {
-  @Input() pokemon!: IPokemon;
+  @Input() pokemon: IPokemon | undefined;
 }
