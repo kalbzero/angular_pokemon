@@ -1,0 +1,53 @@
+:host {
+  --stat-bad: #e74c3c;
+  --stat-medium: #f1c40f;
+  --stat-good: #2ecc71;
+}
+
+/* Container da lista */
+.stat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Nome do status + valor */
+.stat-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.stat-value {
+  opacity: 0.8;
+}
+
+/* Barra vazia */
+.stat-bar {
+  width: 100%;
+  height: 10px;
+  background: #eaeaea;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Barra preenchida */
+.stat-fill {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.4s ease;
+}
+
+/* Cores da barra por var */
+:root {
+  --stat-bad: #e74c3c; // vermelho
+  --stat-medium: #f1c40f; // amarelo
+  --stat-good: #2ecc71; // verde
+}

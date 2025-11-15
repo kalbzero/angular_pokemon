@@ -1,3 +1,5 @@
+@use "sass:color";
+
 /* -----------------------------
    PALETA DE CORES DOS TIPOS
 ------------------------------ */
@@ -26,10 +28,12 @@ $type-colors: (
    FUNÇÃO — TEXTO VISÍVEL EM QUALQUER FUNDO
 ------------------------------ */
 @function readable-text-color($bg) {
-  @if (lightness($bg) > 50) {
-    @return #222; // fundo claro → texto escuro
+  $l: color.channel($bg, "lightness", $space: hsl);
+
+  @if ($l > 50) {
+    @return #222; // fundo claro -> texto escuro
   } @else {
-    @return #fff; // fundo escuro → texto claro
+    @return #fff; // fundo escuro -> texto claro
   }
 }
 

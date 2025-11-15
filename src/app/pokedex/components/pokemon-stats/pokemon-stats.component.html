@@ -1,8 +1,21 @@
-<section>
-  <h3>Status</h3>
-  <ul>
+<section class="card">
+  <h3 class="card-title">Status</h3>
+  <div class="stat-list">
     @for (s of pokemon!.stats; track $index) {
-    <li><strong>{{ s.stat.name | titlecase }}:</strong> {{ s.base_stat }}</li>
+    <div class="stat-row">
+      <div class="stat-label">
+        {{ s.stat.name | titlecase }}
+        <span class="stat-value">{{ s.base_stat }}</span>
+      </div>
+
+      <div class="stat-bar">
+        <div
+          class="stat-fill"
+          [style.width.%]="getStatPercent(s.base_stat)"
+          [style.background]="getStatColor(s.base_stat)"
+        ></div>
+      </div>
+    </div>
     }
-  </ul>
+  </div>
 </section>
