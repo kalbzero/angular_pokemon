@@ -1,0 +1,13 @@
+import { Component, Input } from '@angular/core';
+import { CommonModule, TitleCasePipe } from '@angular/common';
+import { IPokemon } from '../../../shared/interfaces/IPokemon';
+
+@Component({
+  selector: 'pokemon-header',
+  standalone: true,
+  imports: [CommonModule, TitleCasePipe],
+  templateUrl: './pokemon-header.component.html',
+})
+export class PokemonHeaderComponent {
+  @Input() pokemon!: IPokemon;
+}

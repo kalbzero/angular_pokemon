@@ -1,0 +1,8 @@
+<section>
+  <h3>Status</h3>
+  <ul>
+    @for (s of pokemon.stats; track $index) {
+    <li><strong>{{ s.stat.name | titlecase }}:</strong> {{ s.base_stat }}</li>
+    }
+  </ul>
+</section>

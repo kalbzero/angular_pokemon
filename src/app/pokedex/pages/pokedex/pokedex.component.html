@@ -1,0 +1,21 @@
+<h1>Pokédex</h1>
+
+<input
+  [(ngModel)]="search"
+  placeholder="Digite o nome do Pokémon"
+  (keyup.enter)="buscar()"
+  class="search"
+/>
+
+<button (click)="buscar()">Buscar</button>
+
+@if(store.loading()) {
+  <p>Carregando...</p>
+}
+@if(store.error()) {
+  <p>{{ store.error() }}</p>
+}
+
+@if (store.pokemon()) {
+    <app-pokemon-card [pokemon]="store.pokemon()" />
+}

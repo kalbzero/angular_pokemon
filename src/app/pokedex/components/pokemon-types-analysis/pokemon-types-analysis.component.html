@@ -1,0 +1,39 @@
+@if (typeData()) {
+<div class="type-card">
+  <h3>Fraquezas e Resistências</h3>
+
+  @if (weaknesses().length > 0) {
+  <div class="type-section">
+    <h4>Fraquezas</h4>
+    @for (w of weaknesses(); track w) {
+    <span>{{ w | titlecase }}</span>
+    }
+  </div>
+  } @if (resistances().length > 0) {
+  <div class="type-section">
+    <h4>Resistências</h4>
+    @for (r of resistances(); track r) {
+    <span>{{ r | titlecase }}</span>
+    }
+  </div>
+  } @if (immunities().length > 0) {
+  <div class="type-section">
+    <h4>Imunidades</h4>
+    @for (im of immunities(); track im) {
+    <span>{{ im | titlecase }}</span>
+    }
+  </div>
+  } @if ((effectiveness() | keyvalue).length > 0) {
+  <div class="type-section">
+    <h4>Multiplicadores</h4>
+
+    @for (m of effectiveness() | keyvalue; track m.key) {
+    <div>
+      <strong>{{ m.key | titlecase }}</strong
+      >: {{ m.value }}
+    </div>
+    }
+  </div>
+  }
+</div>
+}

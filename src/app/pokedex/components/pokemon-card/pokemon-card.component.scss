@@ -1,0 +1,23 @@
+.pokemon-card {
+  padding: 20px;
+  border-radius: 14px;
+  background: #ffffff;
+  width: 320px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.1);
+  text-align: center;
+
+  img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+  }
+
+  section {
+    margin-top: 20px;
+    text-align: left;
+  }
+
+  ul {
+    padding-left: 20px;
+  }
+}

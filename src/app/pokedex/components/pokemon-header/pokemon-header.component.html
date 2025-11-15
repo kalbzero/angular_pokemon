@@ -1,0 +1,6 @@
+<h2>{{ pokemon.name | titlecase }} (#{{ pokemon.id }})</h2>
+
+<img
+  [src]="pokemon.sprites.other?.['official-artwork']?.front_default || pokemon.sprites.front_default"
+  alt="{{ pokemon.name }}"
+/>
