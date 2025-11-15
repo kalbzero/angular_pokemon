@@ -1,8 +1,10 @@
-<section>
-  <h3>Tipos</h3>
-  <ul>
-    @for (t of pokemon!.types; track $index) {
-    <li>{{ t.type.name | titlecase }}</li>
+<section class="card">
+  <h3 class="card-title">Tipos</h3>
+  <div class="chip-group">
+    @for (t of pokemon!.types; track t.type.name) {
+    <span class="chip type {{ t.type.name }}">
+      {{ t.type.name | titlecase }}
+    </span>
     }
-  </ul>
+  </div>
 </section>

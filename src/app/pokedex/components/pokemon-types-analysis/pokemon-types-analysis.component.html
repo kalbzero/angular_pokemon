@@ -1,38 +1,46 @@
 @if (typeData()) {
-<div class="type-card">
-  <h3>Fraquezas e Resistências</h3>
+<div class="card">
+  <h3 class="card-title">Fraquezas e Resistências</h3>
 
   @if (weaknesses().length > 0) {
   <div class="type-section">
     <h4>Fraquezas</h4>
-    @for (w of weaknesses(); track w) {
-    <span>{{ w | titlecase }}</span>
-    }
+    <div class="chip-group">
+      @for (w of weaknesses(); track w) {
+      <span class="chip weak">{{ w | titlecase }}</span>
+      }
+    </div>
   </div>
   } @if (resistances().length > 0) {
   <div class="type-section">
     <h4>Resistências</h4>
-    @for (r of resistances(); track r) {
-    <span>{{ r | titlecase }}</span>
-    }
+    <div class="chip-group">
+      @for (r of resistances(); track r) {
+      <span class="chip resist">{{ r | titlecase }}</span>
+      }
+    </div>
   </div>
   } @if (immunities().length > 0) {
   <div class="type-section">
     <h4>Imunidades</h4>
-    @for (im of immunities(); track im) {
-    <span>{{ im | titlecase }}</span>
-    }
+    <div class="chip-group">
+      @for (im of immunities(); track im) {
+      <span class="chip immune">{{ im | titlecase }}</span>
+      }
+    </div>
   </div>
   } @if ((effectiveness() | keyvalue).length > 0) {
   <div class="type-section">
     <h4>Multiplicadores</h4>
 
-    @for (m of effectiveness() | keyvalue; track m.key) {
-    <div>
-      <strong>{{ m.key | titlecase }}</strong
-      >: {{ m.value }}
+    <div class="multiplier-list">
+      @for (m of effectiveness() | keyvalue; track m.key) {
+      <div class="multiplier-item">
+        <strong>{{ m.key | titlecase }}</strong>
+        <span class="multi-value">{{ m.value }}</span>
+      </div>
+      }
     </div>
-    }
   </div>
   }
 </div>

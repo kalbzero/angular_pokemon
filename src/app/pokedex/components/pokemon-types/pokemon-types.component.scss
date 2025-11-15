@@ -1,0 +1,16 @@
+@use 'src/styles.scss';
+
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+.type-section {
+  margin-bottom: 1rem;
+}
+
+.type-section h4 {
+  margin: 0 0 .3rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+}

@@ -1,1 +1,105 @@
-/* You can add global styles to this file, and also import other style files */
+/* -----------------------------
+   PALETA DE CORES DOS TIPOS
+------------------------------ */
+$type-colors: (
+  normal: #a8a77a,
+  fire: #ee8130,
+  water: #6390f0,
+  electric: #f7d02c,
+  grass: #7ac74c,
+  ice: #96d9d6,
+  fighting: #c22e28,
+  poison: #a33ea1,
+  ground: #e2bf65,
+  flying: #a98ff3,
+  psychic: #f95587,
+  bug: #a6b91a,
+  rock: #b6a136,
+  ghost: #735797,
+  dragon: #6f35fc,
+  dark: #705746,
+  steel: #b7b7ce,
+  fairy: #d685ad,
+);
+
+/* -----------------------------
+   FUNÇÃO — TEXTO VISÍVEL EM QUALQUER FUNDO
+------------------------------ */
+@function readable-text-color($bg) {
+  @if (lightness($bg) > 50) {
+    @return #222; // fundo claro → texto escuro
+  } @else {
+    @return #fff; // fundo escuro → texto claro
+  }
+}
+
+/* -----------------------------
+   CHIPS — GENÉRICOS
+------------------------------ */
+.chip {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: capitalize;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CHIPS DOS TIPOS */
+.chip.type {
+  @each $name, $color in $type-colors {
+    &.#{$name} {
+      background: $color;
+      color: readable-text-color($color);
+    }
+  }
+}
+
+/* CHIPS ESPECÍFICOS (FRAQUEZA / RESISTÊNCIA / IMUNIDADE) */
+.chip.weak {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.chip.resist {
+  background: #2980b9;
+  color: #fff;
+}
+
+.chip.immune {
+  background: #6c5ce7;
+  color: #fff;
+}
+
+/* GRUPO DE CHIPS */
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* -----------------------------
+   CARD — COMPONENTES E SEÇÕES
+------------------------------ */
+.card {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid #e3e4e8;
+  box-shadow: 0 4px 0.75rem rgba(0, 0, 0, 0.06);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card-title {
+  margin: 0;
+  padding-bottom: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-bottom: 1px solid #ececec;
+}
