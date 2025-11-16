@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { IPokemon } from '../../../shared/interfaces/IPokemon';
-import { TitleCasePipe } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'pokemon-stats',
-  imports: [TitleCasePipe],
+  imports: [TitleCasePipe, CommonModule],
   templateUrl: './pokemon-stats.component.html',
-  styleUrl: './pokemon-stats.component.scss'
+  styleUrl: './pokemon-stats.component.scss',
 })
 export class PokemonStatsComponent {
   @Input() pokemon: IPokemon | undefined;
@@ -17,10 +17,9 @@ export class PokemonStatsComponent {
   }
 
   public getStatColor(stat: number): string {
-    const percent = this.getStatPercent(stat);
-
-    if (percent < 30) return 'var(--stat-bad)'; // fraco
-    if (percent < 60) return 'var(--stat-medium)'; // ok
-    return 'var(--stat-good)'; // forte
+    if (stat < 50) return 'stat-red'; // fraco
+    if (stat < 90) return 'stat-orange'; // mediano
+    if (stat < 120) return 'stat-yellow'; // bom
+    return 'stat-green'; // excelente
   }
 }

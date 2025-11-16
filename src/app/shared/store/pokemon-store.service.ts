@@ -9,26 +9,26 @@ import { firstValueFrom } from 'rxjs';
   providedIn: 'root',
 })
 export class PokemonStore {
-  private utils = inject(UtilsService);
-  private pokemonService = inject(PokemonService);
+  #utilsService = inject(UtilsService);
+  #pokemonService = inject(PokemonService);
 
   // Signals
-  loading = signal(false);
-  pokemon = signal<IPokemon | undefined>(undefined);
-  typeData = signal<IPokemonTypeRelations>({} as IPokemonTypeRelations);
-  error = signal<string | null>(null);
-
+  public loading = signal(false);
+  public pokemon = signal<IPokemon | undefined>(undefined);
+  public species = signal<any | null>(null);
+  public typeData = signal<IPokemonTypeRelations>({} as IPokemonTypeRelations);
+  public error = signal<string | null>(null);
   // ============================================================
   // 1) Buscar Pokémon completo
   // ============================================================
-  async fetchPokemon(name: string) {
+  async fetchPokemon(name: string): Promise<void> {
     this.loading.set(true);
     this.error.set(null);
 
     try {
       // Nao se usa mais o toPromise, é "deprecated"
       // const poke = await this.pokemonService.getPokemon(name).toPromise();
-      const poke = await firstValueFrom(this.pokemonService.getPokemon(name));
+      const poke = await firstValueFrom(this.#pokemonService.getPokemon(name));
       this.pokemon.set(poke);
 
       // pega os nomes dos tipos
@@ -36,6 +36,14 @@ export class PokemonStore {
 
       // busca informações de cada tipo e calcula fraquezas/resistências
       await this.fetchPokemonTypes(types);
+
+      // Extrai ID do species.url
+      const url = poke.species.url; // ex: ".../pokemon-species/10/"
+      const id = url.split('/').filter(Boolean).pop();
+
+      if (id) {
+        this.loadSpecies(Number(id));
+      }
     } catch (e: any) {
       if (e?.status === 404) {
         this.error.set('Pokémon não encontrado.');
@@ -52,19 +60,30 @@ export class PokemonStore {
   // ============================================================
   // 2) Buscar os tipos (1 ou 2) do Pokémon e combinar danos
   // ============================================================
-  async fetchPokemonTypes(pokemonTypes: string[]) {
+  async fetchPokemonTypes(pokemonTypes: string[]): Promise<void> {
     try {
       const responses = await Promise.all(
         pokemonTypes.map((t) =>
-          firstValueFrom(this.pokemonService.getPokemonType(t))
+          firstValueFrom(this.#pokemonService.getPokemonType(t))
         )
       );
 
-      const result = this.utils.calculateEffectiveness(responses);
+      const result = this.#utilsService.calculateEffectiveness(responses);
       this.typeData.set(result);
     } catch (e) {
       console.error('Erro ao buscar tipos:', e);
       this.typeData.set({} as IPokemonTypeRelations);
     }
+  }
+
+  public getPokemonId(): number {
+    return this.pokemon()!.id;
+  }
+
+  /** Carrega a species */
+  private loadSpecies(id: number) {
+    this.#pokemonService.getPokemonSpecies(id).subscribe((sp) => {
+      this.species.set(sp);
+    });
   }
 }

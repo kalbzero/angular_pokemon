@@ -1,5 +1,6 @@
 <section class="card">
   <h3 class="card-title">Status</h3>
+
   <div class="stat-list">
     @for (s of pokemon!.stats; track $index) {
     <div class="stat-row">
@@ -12,7 +13,7 @@
         <div
           class="stat-fill"
           [style.width.%]="getStatPercent(s.base_stat)"
-          [style.background]="getStatColor(s.base_stat)"
+          [ngClass]="getStatColor(s.base_stat)"
         ></div>
       </div>
     </div>

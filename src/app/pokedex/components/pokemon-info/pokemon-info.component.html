@@ -1,6 +1,64 @@
-<section>
-  <h3>Informações</h3>
-  <p><strong>Altura:</strong> {{ pokemon!.height / 10 }} m</p>
-  <p><strong>Peso:</strong> {{ pokemon!.weight / 10 }} kg</p>
-  <p><strong>Base Experience:</strong> {{ pokemon!.base_experience }}</p>
+<section class="info-section">
+  <p class="description"><strong>Descrição:</strong> {{ description() }}</p>
+
+  <div class="info-grid">
+    <div class="info-item">
+      <strong>Categoria:</strong>
+      <span>{{ category() }}</span>
+    </div>
+
+    <div class="info-item">
+      <strong>Altura:</strong>
+      <span>{{ pokemon!.height / 10 }} m</span>
+    </div>
+
+    <div class="info-item">
+      <strong>Peso:</strong>
+      <span>{{ pokemon!.weight / 10 }} kg</span>
+    </div>
+
+    <div class="info-item">
+      <strong>Base Experience:</strong>
+      <span>{{ pokemon!.base_experience }}</span>
+    </div>
+
+    <div class="info-item">
+      <strong>Taxa de Captura:</strong>
+      <span>{{ captureRate() }}%</span>
+    </div>
+
+    <div class="info-item">
+      <strong
+        >Happiness Base:
+        <span
+          class="info-icon"
+          data-tooltip="0 = amizade mínima possível, 70 = valor padrão, 140 = Pokémon obtidos por amizade alta ou eventos especiais, 255 = amizade máxima possível."
+        >
+          ⓘ
+        </span>
+      </strong>
+
+      <span>{{ species()?.base_happiness }}</span>
+    </div>
+
+    <div class="info-item">
+      <strong>Cor:</strong>
+      <span>{{ species()?.color?.name | titlecase }}</span>
+    </div>
+
+    <div class="info-item">
+      <strong>Forma:</strong>
+      <span>{{ species()?.shape?.name | titlecase }}</span>
+    </div>
+
+    <div class="info-item">
+      <strong>Egg Groups:</strong>
+      <span>{{ eggGroups().join(", ") | titlecase }}</span>
+    </div>
+
+    <div class="info-item">
+      <strong>Habitat:</strong>
+      <span>{{ species()?.habitat?.name || "None" | titlecase }}</span>
+    </div>
+  </div>
 </section>

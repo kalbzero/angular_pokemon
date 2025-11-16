@@ -9,11 +9,11 @@ import { IPokemonType } from '../interfaces/IPokemonType';
 })
 export class PokemonService {
   private http = inject(HttpClient);
-  private baseUrl = 'https://pokeapi.co/api/v2/pokemon';
+  private baseUrl = 'https://pokeapi.co/api/v2/';
 
   public getPokemon(name: string): Observable<IPokemon> {
     return this.http
-      .get<IPokemon>(`${this.baseUrl}/${name.toLowerCase()}`)
+      .get<IPokemon>(`${this.baseUrl}pokemon/${name.toLowerCase()}`)
       .pipe(
         catchError((err) => {
           if (err.status === 404) {
@@ -26,7 +26,11 @@ export class PokemonService {
 
   public getPokemonType(type: string): Observable<IPokemonType> {
     return this.http.get<IPokemonType>(
-      `https://pokeapi.co/api/v2/type/${type}`
+      `${this.baseUrl}type/${type.toLowerCase()}`
     );
+  }
+
+  public getPokemonSpecies(id: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}pokemon-species/${id}`);
   }
 }

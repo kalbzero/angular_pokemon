@@ -1,7 +1,10 @@
 :host {
-  --stat-bad: #e74c3c;
-  --stat-medium: #f1c40f;
-  --stat-good: #2ecc71;
+  --stat-red: #e74c3c;
+  --stat-orange: #f77f00;
+  --stat-yellow: #f1c40f;
+  --stat-green: #2ecc71;
+
+  display: block;
 }
 
 /* Container da lista */
@@ -45,9 +48,19 @@
   transition: width 0.4s ease;
 }
 
-/* Cores da barra por var */
-:root {
-  --stat-bad: #e74c3c; // vermelho
-  --stat-medium: #f1c40f; // amarelo
-  --stat-good: #2ecc71; // verde
+/* Classes de cores */
+.stat-red {
+  background: var(--stat-red);
+}
+
+.stat-orange {
+  background: var(--stat-orange);
+}
+
+.stat-yellow {
+  background: var(--stat-yellow);
+}
+
+.stat-green {
+  background: var(--stat-green);
 }
