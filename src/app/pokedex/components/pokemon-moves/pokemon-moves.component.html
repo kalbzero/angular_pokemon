@@ -1,13 +1,16 @@
-<section>
-  <h3>Movimentos</h3>
+<section class="card">
+  <h3 class="card-title">Moves</h3>
 
-  <ul>
-    @for (m of pokemon!.moves.slice(0, 10); track $index) {
-    <li>{{ m.move.name | titlecase }}</li>
+  <div class="moves-list">
+    @for (m of pokemon!.moves; track $index) {
+    <span class="move-pill" (click)="openMove(m.move.name)">
+      {{ m.move.name | titlecase }}
+    </span>
     }
-
-    @if (pokemon!.moves.length > 10) {
-    <li>… e mais {{ pokemon!.moves.length - 10 }}</li>
-    }
-  </ul>
+  </div>
+  <pokemon-move-modal
+    [moveName]="selectedMove()"
+    [visible]="modalOpen()"
+    (closeModal)="onCloseModal()"
+  />
 </section>

@@ -1,0 +1,110 @@
+@if (visible) {
+<div class="overlay" (click)="close()"></div>
+<div class="modal">
+  <button class="close-btn" (click)="close()">×</button>
+  <h2 class="move-title">{{ moveName | titlecase }}</h2>
+  <div class="info-row top-info">
+    <span class="chip type-chip type-{{ move()?.type?.name }}">
+      {{ move()?.type?.name | titlecase }}
+    </span>
+    <span class="chip category-chip">
+      {{ move()?.damage_class?.name | titlecase }}
+    </span>
+  </div>
+  <p class="description">
+    {{ description() }}
+  </p>
+  <div class="stats-grid">
+    <div class="stat">
+      <label>Power</label>
+      <span>{{ move()?.power ?? "—" }}</span>
+    </div>
+    <div class="stat">
+      <label>Accuracy</label>
+      <span>{{ move()?.accuracy ?? "—" }}%</span>
+    </div>
+    <div class="stat">
+      <label>PP</label>
+      <span>{{ move()?.pp }}</span>
+    </div>
+    <div class="stat">
+      <label>Priority</label>
+      <span>{{ move()?.priority }}</span>
+    </div>
+    <div class="stat">
+      <label>Effect Chance</label>
+      <span>{{ move()?.effect_chance ?? "—" }}%</span>
+    </div>
+    <div class="stat">
+      <label>Target</label>
+      <span>{{ move()?.target?.name | titlecase }}</span>
+    </div>
+    @if (move()?.meta?.crit_rate) {
+    <div class="stat">
+      <label>Crítico Extra</label>
+      <span>+{{ move()?.meta?.crit_rate }}</span>
+    </div>
+    } @if (move()?.meta?.healing) {
+    <div class="stat">
+      <label>Healing</label>
+      <span>{{ move()?.meta?.healing }}%</span>
+    </div>
+    } @if (move()?.meta?.drain) {
+    <div class="stat">
+      <label>Drain</label>
+      <span>{{ move()?.meta?.drain }}%</span>
+    </div>
+    } @if (move()?.meta?.ailment?.name !== 'none') {
+    <div class="stat">
+      <label>Status Aplicado</label>
+      <span>{{ move()?.meta?.ailment?.name | titlecase }}</span>
+    </div>
+    } @if (move()?.meta?.ailment_chance) {
+    <div class="stat">
+      <label>Chance Status</label>
+      <span>{{ move()?.meta?.ailment_chance }}%</span>
+    </div>
+    } @if (move()?.meta?.min_hits) {
+    <div class="stat">
+      <label>Hits</label>
+      <span>{{ move()?.meta?.min_hits }} - {{ move()?.meta?.max_hits }}</span>
+    </div>
+    } @if (move()?.meta?.min_turns) {
+    <div class="stat">
+      <label>Duration</label>
+      <span
+        >{{ move()?.meta?.min_turns }} -
+        {{ move()?.meta?.max_turns }} turns</span
+      >
+    </div>
+    } @if(move()?.contest_type) {
+    <div class="stat">
+      <label>Contest</label>
+      <span>{{ move()?.contest_type?.name | titlecase }}</span>
+    </div>
+    }
+  </div>
+  <div class="damage-grid">
+    <div class="stat">
+      <label>Dano Base</label>
+      <span>{{ damageInfo()?.base }}</span>
+    </div>
+
+    <div class="stat">
+      <label>STAB</label>
+      <span>{{ damageInfo()?.stab }}x</span>
+    </div>
+
+    <div class="stat">
+      <label>Efetividade</label>
+      <span>{{ damageInfo()?.effectiveness }}x</span>
+    </div>
+
+    <div class="stat final">
+      <label>Dano Final</label>
+      <span>{{ damageInfo()?.finalDamage }}</span>
+    </div>
+  </div>
+</div>
+
+}

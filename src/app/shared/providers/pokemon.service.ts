@@ -38,4 +38,8 @@ export class PokemonService {
   public getAbility(name: string): Observable<IPokemonAbility> {
     return this.http.get<IPokemonAbility>(`${this.baseUrl}ability/${name.toLowerCase()}`);
   }
+
+  public getPokemonMove(name: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}move/${name.toLowerCase()}`);
+  }
 }

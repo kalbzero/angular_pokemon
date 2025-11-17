@@ -1,0 +1,25 @@
+.moves-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.move-pill {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #e8e8e8;
+  border: 1px solid #dcdcdc;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+.move-pill:hover {
+  background: #d0d0d0;
+  border-color: #bbb;
+}
