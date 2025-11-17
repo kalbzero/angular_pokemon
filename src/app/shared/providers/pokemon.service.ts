@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { IPokemon } from '../interfaces/IPokemon';
 import { IPokemonType } from '../interfaces/IPokemonType';
+import { IPokemonAbility } from '../interfaces/IPokemonAbility';
 
 @Injectable({
   providedIn: 'root',
@@ -32,5 +33,9 @@ export class PokemonService {
 
   public getPokemonSpecies(id: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}pokemon-species/${id}`);
+  }
+
+  public getAbility(name: string): Observable<IPokemonAbility> {
+    return this.http.get<IPokemonAbility>(`${this.baseUrl}ability/${name.toLowerCase()}`);
   }
 }

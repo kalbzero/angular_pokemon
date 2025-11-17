@@ -1,0 +1,43 @@
+.abilities-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ability-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.ability-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ability-name {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.ability-hidden {
+  background: #6c5ce7;
+  color: white;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ability-description {
+  margin: 0;
+  opacity: 0.85;
+  line-height: 1.4;
+  font-size: 13px;
+}

@@ -1,13 +1,21 @@
-<section>
-  <h3>Habilidades</h3>
-  <ul>
-    @for (h of pokemon!.abilities; track $index) {
-    <li>
-      {{ h.ability.name | titlecase }}
-      @if (h.is_hidden) {
-      <span>(habilidade oculta)</span>
-      }
-    </li>
+<section class="card">
+  <h3 class="card-title">Abilities</h3>
+
+  <ul class="abilities-list">
+    @for (ab of abilities(); track ab.name) {
+      <li class="ability-item">
+        <div class="ability-header">
+          <span class="ability-name">{{ ab.name | titlecase }}</span>
+
+          @if (ab.is_hidden) {
+            <span class="ability-hidden">Hidden Ability</span>
+          }
+        </div>
+
+        <p class="ability-description">
+          {{ ab.description }}
+        </p>
+      </li>
     }
   </ul>
 </section>

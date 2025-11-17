@@ -1,9 +1,11 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { effect, inject, Injectable, signal } from '@angular/core';
 import { PokemonService } from '../providers/pokemon.service';
 import { IPokemon } from '../interfaces/IPokemon';
 import { IPokemonTypeRelations } from '../interfaces/IPokemonTypeRelations';
 import { UtilsService } from '../services/utils.service';
 import { firstValueFrom } from 'rxjs';
+import { IPokemonAbility } from '../interfaces/IPokemonAbility';
+import { IPokemonSpecies } from '../interfaces/IPokemonSpecies';
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +17,38 @@ export class PokemonStore {
   // Signals
   public loading = signal(false);
   public pokemon = signal<IPokemon | undefined>(undefined);
-  public species = signal<any | null>(null);
+  public species = signal<IPokemonSpecies>({} as IPokemonSpecies);
+  public abilities = signal<IPokemonAbility[]>([]);
   public typeData = signal<IPokemonTypeRelations>({} as IPokemonTypeRelations);
   public error = signal<string | null>(null);
+
+  constructor() {
+    effect(() => {
+      const poke = this.pokemon();
+      if (!poke) return;
+
+      // limpa habilidades antes de carregar
+      this.abilities.set([]);
+
+      poke.abilities.forEach((ab) => {
+        this.#pokemonService.getAbility(ab.ability.name).subscribe((res: any) => {
+          const en = res.effect_entries.find((e: any) => e.language.name === 'en');
+
+          this.abilities.update((old) => [
+            ...old,
+            {
+              name: ab.ability.name,
+              is_hidden: ab.is_hidden,
+              description: en?.effect ?? 'No description available.',
+              ability: ab.ability,
+              slot: ab.slot,
+            }
+          ]);
+        });
+      });
+    });
+  }
+  
   // ============================================================
   // 1) Buscar Pokémon completo
   // ============================================================
