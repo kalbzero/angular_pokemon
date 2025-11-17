@@ -1,0 +1,24 @@
+/* Container dos chips */
+.games-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Cada chip */
+.game-chip {
+  padding: 0.35rem 0.75rem;
+  background: #ececec;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  border: 1px solid #d0d0d0;
+  transition: 0.2s ease;
+}
+
+/* Hover */
+.game-chip:hover {
+  background: #dcdcdc;
+  cursor: default;
+}

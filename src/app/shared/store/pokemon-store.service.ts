@@ -26,14 +26,10 @@ export class PokemonStore {
     effect(() => {
       const poke = this.pokemon();
       if (!poke) return;
-
-      // limpa habilidades antes de carregar
       this.abilities.set([]);
-
       poke.abilities.forEach((ab) => {
         this.#pokemonService.getAbility(ab.ability.name).subscribe((res: any) => {
           const en = res.effect_entries.find((e: any) => e.language.name === 'en');
-
           this.abilities.update((old) => [
             ...old,
             {
