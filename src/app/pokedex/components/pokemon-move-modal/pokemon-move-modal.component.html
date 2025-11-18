@@ -1,8 +1,8 @@
-@if (visible) {
+@if (visible()) {
 <div class="overlay" (click)="close()"></div>
 <div class="modal">
   <button class="close-btn" (click)="close()">×</button>
-  <h2 class="move-title">{{ moveName | titlecase }}</h2>
+  <h2 class="move-title">{{ moveName() | titlecase }}</h2>
   <div class="info-row top-info">
     <span class="chip type-chip type-{{ move()?.type?.name }}">
       {{ move()?.type?.name | titlecase }}

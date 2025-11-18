@@ -2,7 +2,7 @@
   <h3 class="card-title">Status</h3>
 
   <div class="stat-list">
-    @for (s of pokemon!.stats; track $index) {
+    @for (s of pokemon()!.stats; track $index) {
     <div class="stat-row">
       <div class="stat-label">
         {{ s.stat.name | titlecase }}

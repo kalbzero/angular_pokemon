@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { IPokemon } from '../../../shared/interfaces/IPokemon';
 
@@ -9,5 +9,5 @@ import { IPokemon } from '../../../shared/interfaces/IPokemon';
   templateUrl: './pokemon-types.component.html',
 })
 export class PokemonTypesComponent {
-  @Input() pokemon: IPokemon | undefined;
+  pokemon = input<IPokemon | undefined>();
 }

@@ -1,7 +1,7 @@
 <section class="card">
   <h3 class="card-title">Types</h3>
   <div class="chip-group">
-    @for (t of pokemon!.types; track t.type.name) {
+    @for (t of pokemon()!.types; track t.type.name) {
     <span class="chip type {{ t.type.name }}">
       {{ t.type.name | titlecase }}
     </span>

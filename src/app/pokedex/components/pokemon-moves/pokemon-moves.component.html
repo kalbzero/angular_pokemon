@@ -2,7 +2,7 @@
   <h3 class="card-title">Moves</h3>
 
   <div class="moves-list">
-    @for (m of pokemon!.moves; track $index) {
+    @for (m of pokemon()!.moves; track $index) {
     <span class="move-pill" (click)="openMove(m.move.name)">
       {{ m.move.name | titlecase }}
     </span>

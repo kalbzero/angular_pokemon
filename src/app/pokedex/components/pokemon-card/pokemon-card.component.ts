@@ -1,6 +1,6 @@
-import { Component, computed, inject, Input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { IPokemon } from '../../../shared/interfaces/IPokemon';
-import { CommonModule, TitleCasePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { PokemonStore } from '../../../shared/store/pokemon-store.service';
 import { PokemonHeaderComponent } from '../pokemon-header/pokemon-header.component';
 import { PokemonTypesComponent } from '../pokemon-types/pokemon-types.component';
@@ -29,7 +29,7 @@ import { PokemonGamesComponent } from '../pokemon-games/pokemon-games.component'
   styleUrls: ['./pokemon-card.component.scss'],
 })
 export class PokemonCardComponent {
-  @Input() pokemon: IPokemon | undefined;
+  pokemon = input<IPokemon | undefined>();
   pokemonStore = inject(PokemonStore);
 
   typeData = computed(() => this.pokemonStore.typeData());

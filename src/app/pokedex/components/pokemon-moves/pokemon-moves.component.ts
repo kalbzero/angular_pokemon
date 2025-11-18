@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { IPokemon } from '../../../shared/interfaces/IPokemon';
 import { TitleCasePipe } from '@angular/common';
 import { PokemonMoveModalComponent } from '../pokemon-move-modal/pokemon-move-modal.component';
@@ -10,7 +10,7 @@ import { PokemonMoveModalComponent } from '../pokemon-move-modal/pokemon-move-mo
   styleUrl: './pokemon-moves.component.scss',
 })
 export class PokemonMovesComponent {
-  @Input() pokemon: IPokemon | undefined;
+  pokemon = input<IPokemon | undefined>();
 
   public selectedMove = signal<string>('');
   public modalOpen = signal(false);

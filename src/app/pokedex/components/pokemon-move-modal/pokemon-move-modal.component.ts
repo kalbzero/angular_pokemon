@@ -6,6 +6,9 @@ import {
   computed,
   EventEmitter,
   Output,
+  input,
+  output,
+  model,
 } from '@angular/core';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { PokemonService } from '../../../shared/providers/pokemon.service';
@@ -19,9 +22,9 @@ import { PokemonStore } from '../../../shared/store/pokemon-store.service';
   styleUrl: './pokemon-move-modal.component.scss',
 })
 export class PokemonMoveModalComponent {
-  @Input() moveName!: string;
-  @Input() visible = false;
-  @Output() closeModal = new EventEmitter<void>();
+  public moveName = input.required<string>();
+  public visible = model<boolean>(false);
+  public closeModal = output<void>();
 
   #pokemonService = inject(PokemonService);
   #pokemonStore = inject(PokemonStore);
@@ -60,9 +63,9 @@ export class PokemonMoveModalComponent {
   });
 
   ngOnChanges(): void {
-    if (this.visible && this.moveName) {
+    if (this.visible() && this.moveName()) {
       this.#pokemonService
-        .getPokemonMove(this.moveName)
+        .getPokemonMove(this.moveName())
         .subscribe((res: any) => {
           this.move.set(res);
         });
@@ -78,7 +81,7 @@ export class PokemonMoveModalComponent {
   });
 
   close() {
-    this.visible = false;
+    this.visible.set(false);
     this.closeModal.emit();
   }
 }

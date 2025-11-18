@@ -38,17 +38,17 @@
         </span>
       </strong>
 
-      <span>{{ species()?.base_happiness }}</span>
+      <span>{{ species().base_happiness }}</span>
     </div>
 
     <div class="info-item">
       <strong>Color:</strong>
-      <span>{{ species()?.color?.name | titlecase }}</span>
+      <span>{{ species().color.name | titlecase }}</span>
     </div>
 
     <div class="info-item">
       <strong>Shape:</strong>
-      <span>{{ species()?.shape?.name | titlecase }}</span>
+      <span>{{ species().shape.name | titlecase }}</span>
     </div>
 
     <div class="info-item">
@@ -58,7 +58,7 @@
 
     <div class="info-item">
       <strong>Habitat:</strong>
-      <span>{{ species()?.habitat?.name || "None" | titlecase }}</span>
+      <span>{{ species().habitat.name || "None" | titlecase }}</span>
     </div>
   </div>
 </section>
