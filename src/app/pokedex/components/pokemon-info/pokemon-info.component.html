@@ -43,12 +43,20 @@
 
     <div class="info-item">
       <strong>Color:</strong>
+      @if (species().color) {
       <span>{{ species().color.name | titlecase }}</span>
+      } @else {
+      <span>-</span>
+      }
     </div>
 
     <div class="info-item">
       <strong>Shape:</strong>
+      @if (species().shape) {
       <span>{{ species().shape.name | titlecase }}</span>
+      } @else {
+      <span>-</span>
+      }
     </div>
 
     <div class="info-item">
@@ -58,7 +66,11 @@
 
     <div class="info-item">
       <strong>Habitat:</strong>
-      <span>{{ species().habitat.name || "None" | titlecase }}</span>
+      @if(species().habitat) {
+
+      } @else {
+        <span>None</span>
+      }
     </div>
   </div>
 </section>
