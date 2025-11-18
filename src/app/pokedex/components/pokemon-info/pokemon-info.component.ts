@@ -1,7 +1,6 @@
-import { Component, Input, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { IPokemon } from '../../../shared/interfaces/IPokemon';
 import { PokemonStore } from '../../../shared/store/pokemon-store.service';
-import { PokemonService } from '../../../shared/providers/pokemon.service';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 
 @Component({
@@ -12,7 +11,7 @@ import { CommonModule, TitleCasePipe } from '@angular/common';
   styleUrls: ['./pokemon-info.component.scss'],
 })
 export class PokemonInfoComponent {
-  @Input() pokemon: IPokemon | undefined;
+  pokemon = input<IPokemon | undefined>();
 
   #pokemonStore = inject(PokemonStore);
 

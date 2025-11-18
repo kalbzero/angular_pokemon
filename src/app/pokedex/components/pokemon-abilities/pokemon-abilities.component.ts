@@ -12,8 +12,6 @@ import { PokemonStore } from '../../../shared/store/pokemon-store.service';
   styleUrl: './pokemon-abilities.component.scss',
 })
 export class PokemonAbilitiesComponent {
-  @Input() pokemon: IPokemon | undefined;
-
   #pokemonStore = inject(PokemonStore);
 
   public abilities = this.#pokemonStore.abilities;

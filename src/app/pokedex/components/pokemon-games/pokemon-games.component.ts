@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { IPokemon } from '../../../shared/interfaces/IPokemon';
 import { TitleCasePipe } from '@angular/common';
 
@@ -9,5 +9,5 @@ import { TitleCasePipe } from '@angular/common';
   styleUrl: './pokemon-games.component.scss'
 })
 export class PokemonGamesComponent {
-  @Input() pokemon: IPokemon | undefined;
+  pokemon = input<IPokemon | undefined>();
 }
