@@ -13,7 +13,6 @@ práticas de arquitetura e UI/UX.
 
 ![Angular](https://img.shields.io/badge/Angular-19-dd0031?style=for-the-badge&logo=angular)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
-![RxJS](https://img.shields.io/badge/RxJS-7-b7178c?style=for-the-badge&logo=reactivex)
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
 
