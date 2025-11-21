@@ -1,19 +1,22 @@
-<h1>Pokédex</h1>
+<div class="pokedex-header">
+  <h1 class="pokedex-title">Pokédex</h1>
 
-<input
-  [(ngModel)]="search"
-  placeholder="Digite o nome do Pokémon"
-  (keyup.enter)="buscar()"
-  class="search"
-/>
+  <div class="search-area">
+    <input
+      [(ngModel)]="search"
+      placeholder="Digite o nome do Pokémon"
+      (keyup.enter)="buscar()"
+      class="search"
+    />
 
-<button (click)="buscar()">Buscar</button>
+    <button class="btn-search" (click)="buscar()">Buscar</button>
+  </div>
+</div>
 
 @if(store.loading()) {
-  <p>Carregando...</p>
-}
-@if(store.error()) {
-  <p>{{ store.error() }}</p>
+  <div class="loading-overlay">
+    <div class="pokeball"></div>
+  </div>
 }
 
 @if (store.pokemon()) {

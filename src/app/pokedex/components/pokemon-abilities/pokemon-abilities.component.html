@@ -2,7 +2,7 @@
   <h3 class="card-title">Abilities</h3>
 
   <ul class="abilities-list">
-    @for (ab of abilities(); track ab.name) {
+    @for (ab of abilities(); track ab.name + $index) {
       <li class="ability-item">
         <div class="ability-header">
           <span class="ability-name">{{ ab.name | titlecase }}</span>

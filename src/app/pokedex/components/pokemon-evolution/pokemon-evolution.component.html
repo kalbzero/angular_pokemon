@@ -1,0 +1,66 @@
+<section class="card evolution-card">
+  <h3 class="card-title">Evolution Chain</h3>
+
+  @if (evolutionTree()) {
+  <div class="evo-tree">
+    <ng-container
+      *ngTemplateOutlet="renderNode; context: { node: evolutionTree() }"
+    ></ng-container>
+  </div>
+  }
+
+  <ng-template #renderNode let-node="node">
+    <!-- 🔥 CASO 1: EVOLUÇÃO PARALELA (SLOWPOKE, EEVEE, ETC.) -->
+    @if (node.isParallel) {
+
+    <!-- Pai -->
+    <div class="evo-card parent">
+      <img [src]="node.image" [alt]="node.name" class="evo-img" />
+      <p class="evo-name">{{ node.name | titlecase }}</p>
+    </div>
+
+    <div class="arrow-wrapper">
+      <span class="arrow">↓</span>
+    </div>
+
+    <!-- Grid de filhos -->
+    <div class="evo-grid" [ngClass]="node.layoutClass">
+      @for (child of node.children; track child.name) {
+      <ng-container
+        *ngTemplateOutlet="renderNode; context: { node: child }"
+      ></ng-container>
+      }
+    </div>
+    }
+
+    <!-- 🔵 CASO 2: EVOLUÇÃO EM LINHA (CHARMANDER, ETC.) -->
+    @else if (node.children?.length === 1) {
+
+    <div class="evo-inline">
+      <!-- Pai -->
+      <div class="evo-card small">
+        <img [src]="node.image" [alt]="node.name" class="evo-img" />
+        <p class="evo-name">{{ node.name | titlecase }}</p>
+      </div>
+
+      <span class="arrow-inline">→</span>
+
+      <!-- Filho único -->
+      <ng-container
+        *ngTemplateOutlet="renderNode; context: { node: node.children[0] }"
+      ></ng-container>
+    </div>
+
+    }
+
+    <!-- 🔸 CASO 3: NÓ FINAL (SEM FILHOS) -->
+    @else {
+
+    <div class="evo-card">
+      <img [src]="node.image" [alt]="node.name" class="evo-img" />
+      <p class="evo-name">{{ node.name | titlecase }}</p>
+    </div>
+
+    }
+  </ng-template>
+</section>

@@ -1,4 +1,4 @@
-import { effect, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { PokemonService } from '../providers/pokemon.service';
 import { IPokemon } from '../interfaces/IPokemon';
 import { IPokemonTypeRelations } from '../interfaces/IPokemonTypeRelations';
@@ -6,6 +6,11 @@ import { UtilsService } from '../services/utils.service';
 import { firstValueFrom } from 'rxjs';
 import { IPokemonAbility } from '../interfaces/IPokemonAbility';
 import { IPokemonSpecies } from '../interfaces/IPokemonSpecies';
+import {
+  EvolutionNode,
+  IPokemonEvolutionChain,
+} from '../interfaces/IPokemonEvolutionChain';
+import { ToastService } from '../services/toast.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,14 +18,47 @@ import { IPokemonSpecies } from '../interfaces/IPokemonSpecies';
 export class PokemonStore {
   #utilsService = inject(UtilsService);
   #pokemonService = inject(PokemonService);
+  #toastService = inject(ToastService);
 
   // Signals
   public loading = signal(false);
   public pokemon = signal<IPokemon | undefined>(undefined);
   public species = signal<IPokemonSpecies>({} as IPokemonSpecies);
   public abilities = signal<IPokemonAbility[]>([]);
+  public evolutionChain = signal<IPokemonEvolutionChain>(
+    {} as IPokemonEvolutionChain
+  );
+  public evolutionList = computed(() => {
+    const chain = this.evolutionChain();
+
+    if (!chain?.chain) return [];
+
+    const evolutions: { name: string; id: number; image: string }[] = [];
+    let current = chain.chain;
+
+    while (current) {
+      const speciesUrl = current.species.url;
+      const id = Number(speciesUrl.split('/').filter(Boolean).pop());
+
+      evolutions.push({
+        name: current.species.name,
+        id,
+        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
+      });
+
+      current = current.evolves_to?.[0];
+    }
+
+    return evolutions;
+  });
+  public evolutionTree = computed(() => {
+    const evo = this.evolutionChain();
+
+    if (!evo?.chain) return null;
+
+    return this.buildEvolutionTree(evo.chain);
+  });
   public typeData = signal<IPokemonTypeRelations>({} as IPokemonTypeRelations);
-  public error = signal<string | null>(null);
 
   constructor() {
     effect(() => {
@@ -28,43 +66,38 @@ export class PokemonStore {
       if (!poke) return;
       this.abilities.set([]);
       poke.abilities.forEach((ab) => {
-        this.#pokemonService.getAbility(ab.ability.name).subscribe((res: any) => {
-          const en = res.effect_entries.find((e: any) => e.language.name === 'en');
-          this.abilities.update((old) => [
-            ...old,
-            {
-              name: ab.ability.name,
-              is_hidden: ab.is_hidden,
-              description: en?.effect ?? 'No description available.',
-              ability: ab.ability,
-              slot: ab.slot,
-            }
-          ]);
-        });
+        this.#pokemonService
+          .getAbility(ab.ability.name)
+          .subscribe((res: any) => {
+            const en = res.effect_entries.find(
+              (e: any) => e.language.name === 'en'
+            );
+            this.abilities.update((old) => [
+              ...old,
+              {
+                name: ab.ability.name,
+                is_hidden: ab.is_hidden,
+                description: en?.effect ?? 'No description available.',
+                ability: ab.ability,
+                slot: ab.slot,
+              },
+            ]);
+          });
       });
     });
   }
-  
-  // ============================================================
-  // 1) Buscar Pokémon completo
-  // ============================================================
+
   async fetchPokemon(name: string): Promise<void> {
     this.loading.set(true);
-    this.error.set(null);
 
     try {
-      // Nao se usa mais o toPromise, é "deprecated"
-      // const poke = await this.pokemonService.getPokemon(name).toPromise();
       const poke = await firstValueFrom(this.#pokemonService.getPokemon(name));
       this.pokemon.set(poke);
 
-      // pega os nomes dos tipos
       const types = poke!.types.map((t) => t.type.name);
 
-      // busca informações de cada tipo e calcula fraquezas/resistências
       await this.fetchPokemonTypes(types);
 
-      // Extrai ID do species.url
       const url = poke.species.url; // ex: ".../pokemon-species/10/"
       const id = url.split('/').filter(Boolean).pop();
 
@@ -72,10 +105,14 @@ export class PokemonStore {
         this.loadSpecies(Number(id));
       }
     } catch (e: any) {
-      if (e?.status === 404) {
-        this.error.set('Pokémon não encontrado.');
+      const is404 =
+        e?.status === 404 ||
+        e?.message === 'not-found';
+
+      if (is404) {
+        this.#toastService.show(`O Pokémon '${name}' não existe.`, 'error');
       } else {
-        this.error.set('Erro ao buscar dados.');
+        this.#toastService.show('Pokémon não encontrado.', 'error');
       }
       this.pokemon.set(undefined);
       this.typeData.set({} as IPokemonTypeRelations);
@@ -84,9 +121,6 @@ export class PokemonStore {
     }
   }
 
-  // ============================================================
-  // 2) Buscar os tipos (1 ou 2) do Pokémon e combinar danos
-  // ============================================================
   async fetchPokemonTypes(pokemonTypes: string[]): Promise<void> {
     try {
       const responses = await Promise.all(
@@ -99,6 +133,7 @@ export class PokemonStore {
       this.typeData.set(result);
     } catch (e) {
       console.error('Erro ao buscar tipos:', e);
+      this.#toastService.show('Erro ao buscar tipos.', 'error');
       this.typeData.set({} as IPokemonTypeRelations);
     }
   }
@@ -107,10 +142,70 @@ export class PokemonStore {
     return this.pokemon()!.id;
   }
 
-  /** Carrega a species */
+  /* Carrega a species */
   private loadSpecies(id: number) {
     this.#pokemonService.getPokemonSpecies(id).subscribe((sp) => {
       this.species.set(sp);
+      /* Carrega a cadeia evolutiva */
+      const evolutionUrl = sp.evolution_chain.url;
+      const evoId = evolutionUrl.split('/').filter(Boolean).pop();
+      if (evoId) {
+        this.#pokemonService
+          .getPokemonEvolutionChain(Number(evoId))
+          .subscribe((evoData) => {
+            this.evolutionChain.set(evoData);
+          });
+      }
     });
+  }
+
+  private extractIdFromUrl(url: string): number {
+    const parts = url.split('/').filter(Boolean);
+    return Number(parts[parts.length - 1]);
+  }
+
+  private buildEvolutionTree(node: any): EvolutionNode {
+    const name = node.species.name;
+    const speciesId = this.extractIdFromUrl(node.species.url);
+
+    const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${speciesId}.png`;
+
+    const evoDetails = node.evolution_details?.[0];
+    let trigger = '';
+    let details = '';
+
+    if (evoDetails) {
+      trigger = evoDetails.trigger?.name ?? '';
+
+      if (evoDetails.min_level) details = `Level ${evoDetails.min_level}`;
+      else if (evoDetails.item) details = evoDetails.item.name;
+      else if (evoDetails.min_happiness) details = 'Happiness';
+      else if (evoDetails.time_of_day) details = `At ${evoDetails.time_of_day}`;
+      else if (evoDetails.known_move_type)
+        details = `With ${evoDetails.known_move_type.name} move`;
+    }
+
+    const children = (node.evolves_to || []).map((e: any) =>
+      this.buildEvolutionTree(e)
+    );
+
+    const isParallel = children.length > 1;
+
+    // Agora o layoutClass realmente será enviado ao componente
+    const layoutClass = isParallel
+      ? children.length % 2 === 0
+        ? 'grid-2'
+        : 'grid-3'
+      : undefined;
+
+    return {
+      name,
+      image,
+      trigger,
+      details,
+      isParallel,
+      layoutClass,
+      children,
+    };
   }
 }

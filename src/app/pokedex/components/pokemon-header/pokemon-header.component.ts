@@ -7,6 +7,7 @@ import { IPokemon } from '../../../shared/interfaces/IPokemon';
   standalone: true,
   imports: [CommonModule, TitleCasePipe],
   templateUrl: './pokemon-header.component.html',
+  styleUrls: ['./pokemon-header.component.scss']
 })
 export class PokemonHeaderComponent {
   pokemon = input<IPokemon | undefined>();

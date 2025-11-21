@@ -1,0 +1,68 @@
+.evo-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* CARD */
+.evo-card {
+  text-align: center;
+}
+
+.evo-img {
+  width: 96px;
+  height: 96px;
+}
+
+/* SETAS */
+.arrow-wrapper,
+.arrow-inline {
+  text-align: center;
+}
+
+.arrow,
+.arrow-inline {
+  font-size: 1.5rem;
+}
+
+/* FILHOS 1 ou 2 → INLINE */
+.evo-inline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* GRID PARA MÚLTIPLAS EVOLUÇÕES */
+.evo-grid {
+  display: grid;
+  gap: 1rem;
+  justify-content: center;
+  width: 100%;
+}
+
+/* PAR → Máximo 2 colunas */
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(140px, 1fr));
+}
+
+/* ÍMPAR → Máximo 3 colunas */
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(140px, 1fr));
+}
+
+/* RESPONSIVO */
+@media (max-width: 640px) {
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: repeat(1, minmax(120px, 1fr));
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+  }
+}

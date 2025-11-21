@@ -1,11 +1,8 @@
 import {
   Component,
-  Input,
   signal,
   inject,
   computed,
-  EventEmitter,
-  Output,
   input,
   output,
   model,
@@ -13,6 +10,7 @@ import {
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { PokemonService } from '../../../shared/providers/pokemon.service';
 import { PokemonStore } from '../../../shared/store/pokemon-store.service';
+import { IPokemonMove } from '../../../shared/interfaces/IPokemonMove';
 
 @Component({
   selector: 'pokemon-move-modal',
@@ -29,7 +27,7 @@ export class PokemonMoveModalComponent {
   #pokemonService = inject(PokemonService);
   #pokemonStore = inject(PokemonStore);
 
-  public move = signal<any | null>(null);
+  public move = signal<IPokemonMove | null>(null);
 
   public damageInfo = computed(() => {
     const move = this.move();

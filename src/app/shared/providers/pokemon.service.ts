@@ -4,6 +4,9 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { IPokemon } from '../interfaces/IPokemon';
 import { IPokemonType } from '../interfaces/IPokemonType';
 import { IPokemonAbility } from '../interfaces/IPokemonAbility';
+import { IPokemonMove } from '../interfaces/IPokemonMove';
+import { IPokemonSpecies } from '../interfaces/IPokemonSpecies';
+import { IPokemonEvolutionChain } from '../interfaces/IPokemonEvolutionChain';
 
 @Injectable({
   providedIn: 'root',
@@ -31,15 +34,19 @@ export class PokemonService {
     );
   }
 
-  public getPokemonSpecies(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}pokemon-species/${id}`);
+  public getPokemonSpecies(id: number): Observable<IPokemonSpecies> {
+    return this.http.get<IPokemonSpecies>(`${this.baseUrl}pokemon-species/${id}`);
   }
 
   public getAbility(name: string): Observable<IPokemonAbility> {
     return this.http.get<IPokemonAbility>(`${this.baseUrl}ability/${name.toLowerCase()}`);
   }
 
-  public getPokemonMove(name: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}move/${name.toLowerCase()}`);
+  public getPokemonMove(name: string): Observable<IPokemonMove> {
+    return this.http.get<IPokemonMove>(`${this.baseUrl}move/${name.toLowerCase()}`);
+  }
+
+  public getPokemonEvolutionChain(id: number): Observable<IPokemonEvolutionChain> {
+    return this.http.get<IPokemonEvolutionChain>(`${this.baseUrl}evolution-chain/${id}`);
   }
 }

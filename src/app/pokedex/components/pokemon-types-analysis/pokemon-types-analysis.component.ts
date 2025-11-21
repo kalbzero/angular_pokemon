@@ -16,4 +16,12 @@ export class PokemonTypesAnalysisComponent {
   resistances = computed(() => this.typeData()?.resistances ?? []);
   immunities = computed(() => this.typeData()?.immunities ?? []);
   effectiveness = computed(() => this.typeData()?.effectiveness ?? {});
+
+  effectivenessKeyed = computed(() => {
+  const eff = this.effectiveness();
+  return Object.keys(eff).map(key => ({
+    key,
+    value: eff[key],
+  }));
+});
 }

@@ -6,7 +6,8 @@
   <div class="type-section">
     <h4>Weaknesses</h4>
     <div class="chip-group">
-      @for (w of weaknesses(); track w) {
+      <!-- w + $index resolves track key issue, NG0505 -->
+      @for (w of weaknesses(); track w + $index) {
       <span class="chip weak">{{ w | titlecase }}</span>
       }
     </div>
@@ -15,7 +16,7 @@
   <div class="type-section">
     <h4>Resistances</h4>
     <div class="chip-group">
-      @for (r of resistances(); track r) {
+      @for (r of resistances(); track r + $index) {
       <span class="chip resist">{{ r | titlecase }}</span>
       }
     </div>
@@ -24,7 +25,7 @@
   <div class="type-section">
     <h4>Immunities</h4>
     <div class="chip-group">
-      @for (im of immunities(); track im) {
+      @for (im of immunities(); track im + $index) {
       <span class="chip immune">{{ im | titlecase }}</span>
       }
     </div>
@@ -34,7 +35,7 @@
     <h4>Multipliers</h4>
 
     <div class="multiplier-list">
-      @for (m of effectiveness() | keyvalue; track m.key) {
+      @for (m of effectivenessKeyed(); track m.key) {
       <div class="multiplier-item">
         <strong>{{ m.key | titlecase }}</strong>
         <span class="multi-value">{{ m.value }}</span>
