@@ -105,9 +105,7 @@ export class PokemonStore {
         this.loadSpecies(Number(id));
       }
     } catch (e: any) {
-      const is404 =
-        e?.status === 404 ||
-        e?.message === 'not-found';
+      const is404 = e?.status === 404 || e?.message === 'not-found';
 
       if (is404) {
         this.#toastService.show(`O Pokémon '${name}' não existe.`, 'error');
@@ -173,16 +171,66 @@ export class PokemonStore {
     const evoDetails = node.evolution_details?.[0];
     let trigger = '';
     let details = '';
-
     if (evoDetails) {
       trigger = evoDetails.trigger?.name ?? '';
 
-      if (evoDetails.min_level) details = `Level ${evoDetails.min_level}`;
-      else if (evoDetails.item) details = evoDetails.item.name;
-      else if (evoDetails.min_happiness) details = 'Happiness';
-      else if (evoDetails.time_of_day) details = `At ${evoDetails.time_of_day}`;
-      else if (evoDetails.known_move_type)
-        details = `With ${evoDetails.known_move_type.name} move`;
+      if (evoDetails.min_level) {
+        details = `Level ${evoDetails.min_level}`;
+      } else if (evoDetails.item) {
+        details = `Use ${evoDetails.item.name}`;
+      } else if (evoDetails.held_item) {
+        details = `Trade holding ${evoDetails.held_item.name}`;
+      } else if (evoDetails.min_happiness) {
+        details = 'High friendship';
+      } else if (evoDetails.min_affection) {
+        details = 'High affection';
+      } else if (evoDetails.min_beauty) {
+        details = `Beauty ${evoDetails.min_beauty}+`;
+      }
+
+      if (evoDetails.location) {
+        details += details
+          ? `, at ${evoDetails.location.name}`
+          : `At ${evoDetails.location.name}`;
+      }
+
+      if (evoDetails.time_of_day && evoDetails.time_of_day.trim() !== '') {
+        details += details
+          ? `, during ${evoDetails.time_of_day}`
+          : `During ${evoDetails.time_of_day}`;
+      }
+
+      if (evoDetails.known_move) {
+        details = `Knowing move ${evoDetails.known_move.name}`;
+      }
+
+      if (evoDetails.known_move_type) {
+        details = `Knowing a ${evoDetails.known_move_type.name}-type move`;
+      }
+
+      if (evoDetails.party_species) {
+        details = `With ${evoDetails.party_species.name} in party`;
+      }
+
+      if (evoDetails.party_type) {
+        details = `With a ${evoDetails.party_type.name}-type Pokémon in party`;
+      }
+
+      if (evoDetails.gender !== null) {
+        details += details
+          ? `, gender: ${evoDetails.gender === 1 ? 'female' : 'male'}`
+          : `Gender: ${evoDetails.gender === 1 ? 'female' : 'male'}`;
+      }
+
+      if (evoDetails.needs_overworld_rain) {
+        details += details ? ', while raining' : 'While raining';
+      }
+
+      if (evoDetails.turn_upside_down) {
+        details += details
+          ? ', turn console upside down'
+          : 'Turn console upside down';
+      }
     }
 
     const children = (node.evolves_to || []).map((e: any) =>

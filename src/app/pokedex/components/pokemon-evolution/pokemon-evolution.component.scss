@@ -15,6 +15,11 @@
   height: 96px;
 }
 
+.evo-details {
+  font-size: 0.7rem;
+  color: #666;
+}
+
 /* SETAS */
 .arrow-wrapper,
 .arrow-inline {
@@ -64,5 +69,17 @@
   .grid-2,
   .grid-3 {
     grid-template-columns: repeat(2, minmax(140px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .evo-inline {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .arrow-inline {
+    transform: rotate(90deg);
+    margin: 0.5rem 0;
   }
 }

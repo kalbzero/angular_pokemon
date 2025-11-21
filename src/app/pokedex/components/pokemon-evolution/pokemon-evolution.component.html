@@ -59,6 +59,9 @@
     <div class="evo-card">
       <img [src]="node.image" [alt]="node.name" class="evo-img" />
       <p class="evo-name">{{ node.name | titlecase }}</p>
+      @if (node.details) {
+        <p class="evo-details">{{ node.details }}</p>
+      }
     </div>
 
     }
