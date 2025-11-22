@@ -262,21 +262,22 @@ export class PokemonStore {
         : 'grid-3'
       : undefined;
 
-    // Caso: o nó tem 2 children E cada child tem exatamente 1 child (ex: Wurmple)
-    const isTwoIntermediateBranches =
-      children.length === 2 &&
-      children[0]?.children?.length === 1 &&
-      children[1]?.children?.length === 1;
-    
+    const isParallelWithFinals =
+      isParallel &&
+      children.length > 0 &&
+      children.every(
+        (c: any) => Array.isArray(c.children) && c.children.length === 1
+      );
+
     return {
       name,
       image,
       trigger,
       details,
       isParallel,
+      isParallelWithFinals,
       layoutClass,
       children,
-      isTwoIntermediateBranches,
     };
   }
 }

@@ -23,7 +23,33 @@
       <span class="arrow">↓</span>
     </div>
 
-    <!-- Grid de filhos -->
+    <!-- Se for paralelo onde cada filho tem 1 final (Wurmple) -->
+    @if (node.isParallelWithFinals) {
+    <div class="evo-grid parallel-branches">
+      @for (child of node.children; track child.name) {
+      <div class="branch-column">
+        <!-- intermediário (ex: Silcoon / Cascoon) -->
+        <div class="evo-card small">
+          <img [src]="child.image" [alt]="child.name" class="evo-img" />
+          <p class="evo-name">{{ child.name | titlecase }}</p>
+          @if (child.details) {
+          <p class="evo-details">{{ child.details }}</p>
+          }
+        </div>
+
+        <div class="arrow-wrapper small">
+          <span class="arrow">↓</span>
+        </div>
+
+        <!-- final do ramo (ex: Beautifly / Dustox) -->
+        <ng-container
+          *ngTemplateOutlet="renderNode; context: { node: child.children[0] }"
+        ></ng-container>
+      </div>
+      }
+    </div>
+    } @else {
+    <!-- Caso paralelo normal: grid simples -->
     <div class="evo-grid" [ngClass]="node.layoutClass">
       @for (child of node.children; track child.name) {
       <ng-container
@@ -31,7 +57,7 @@
       ></ng-container>
       }
     </div>
-    }
+    } }
 
     <!-- 🟣 CASO 1.5: FILHO ÚNICO QUE TEM EVOLUÇÕES PARALELAS (Ralts → Kirlia → 2 evoluções) -->
     @else if (node.children?.length === 1 && node.children[0].isParallel) {
@@ -71,49 +97,6 @@
         <ng-container
           *ngTemplateOutlet="renderNode; context: { node: child }"
         ></ng-container>
-        }
-      </div>
-    </div>
-    }
-
-    <!-- 🟢 CASO 1.6: FILHO ÚNICO, MAS ESSE FILHO TEM 2 EVOLUÇÕES COM 1 FINAL CADA (Wurmple) -->
-    @else if ( node.children?.length === 1 && node.children[0].children?.length
-    === 2 && node.children[0].children[0].children?.length === 1 &&
-    node.children[0].children[1].children?.length === 1 ) {
-
-    <div class="evo-column">
-      <!-- Pai -->
-      <div class="evo-card small">
-        <img [src]="node.image" class="evo-img" />
-        <p class="evo-name">{{ node.name | titlecase }}</p>
-      </div>
-
-      <div class="arrow-wrapper">
-        <span class="arrow">↓</span>
-      </div>
-
-      <!-- Grid com Silcoon e Cascoon -->
-      <div class="evo-grid parallel-branches">
-        @for (branch of node.children[0].children; track branch.name) {
-        <div class="branch-column">
-          <!-- Intermediário (Silcoon / Cascoon) -->
-          <div class="evo-card small">
-            <img [src]="branch.image" class="evo-img" />
-            <p class="evo-name">{{ branch.name | titlecase }}</p>
-          </div>
-
-          <div class="arrow-wrapper small">
-            <span class="arrow">↓</span>
-          </div>
-
-          <!-- Final (Beautifly / Dustox) -->
-          <ng-container
-            *ngTemplateOutlet="
-              renderNode;
-              context: { node: branch.children[0] }
-            "
-          ></ng-container>
-        </div>
         }
       </div>
     </div>
