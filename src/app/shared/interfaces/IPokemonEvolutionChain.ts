@@ -47,5 +47,6 @@ export interface EvolutionNode {
   isParallel?: boolean;
   layoutClass?: string;
   time_of_day?: string;
+  isTwoIntermediateBranches?: boolean;
   children: EvolutionNode[];
 }

@@ -31,6 +31,11 @@
   font-size: 1.5rem;
 }
 
+.arrow-down {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
 /* FILHOS 1 ou 2 → INLINE */
 .evo-inline {
   display: flex;
@@ -45,6 +50,56 @@
   gap: 1rem;
   justify-content: center;
   width: 100%;
+}
+
+.evo-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.evo-grid.parallel {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+/* container geral de ramos paralelos para Wurmple */
+.evo-grid.parallel-branches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  justify-items: center;
+  align-items: start;
+  margin-top: 0.5rem;
+}
+
+.evo-card.small .evo-img {
+  width: 72px;
+  height: 72px;
+}
+
+/* cada coluna vertical (Silcoon + ↓ + final) */
+.branch-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* mantém as imagens menores para colunas */
+.branch-column .evo-img {
+  width: 84px;
+  height: 84px;
+}
+
+/* seta menor */
+.arrow-wrapper.small {
+  margin: 0;
+  line-height: 1;
 }
 
 /* PAR → Máximo 2 colunas */
@@ -81,5 +136,17 @@
   .arrow-inline {
     transform: rotate(90deg);
     margin: 0.5rem 0;
+  }
+}
+
+/* responsivo: em telas bem pequenas empilha as colunas verticalmente */
+@media (max-width: 480px) {
+  .evo-grid.parallel-branches {
+    grid-template-columns: 1fr;
+  }
+
+  .branch-column .evo-img {
+    width: 72px;
+    height: 72px;
   }
 }

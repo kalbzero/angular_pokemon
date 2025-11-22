@@ -231,6 +231,22 @@ export class PokemonStore {
           ? ', turn console upside down'
           : 'Turn console upside down';
       }
+
+      // ⭐ Caso: Tyrogue → Hitmonlee/Hitmonchan/Hitmontop
+      if (
+        evoDetails.relative_physical_stats !== null &&
+        evoDetails.relative_physical_stats !== undefined
+      ) {
+        const stat = evoDetails.relative_physical_stats;
+
+        if (stat === 1) {
+          details = 'Attack > Defense';
+        } else if (stat === 0) {
+          details = 'Attack = Defense';
+        } else if (stat === -1) {
+          details = 'Defense > Attack';
+        }
+      }
     }
 
     const children = (node.evolves_to || []).map((e: any) =>
@@ -246,6 +262,12 @@ export class PokemonStore {
         : 'grid-3'
       : undefined;
 
+    // Caso: o nó tem 2 children E cada child tem exatamente 1 child (ex: Wurmple)
+    const isTwoIntermediateBranches =
+      children.length === 2 &&
+      children[0]?.children?.length === 1 &&
+      children[1]?.children?.length === 1;
+    
     return {
       name,
       image,
@@ -254,6 +276,7 @@ export class PokemonStore {
       isParallel,
       layoutClass,
       children,
+      isTwoIntermediateBranches,
     };
   }
 }

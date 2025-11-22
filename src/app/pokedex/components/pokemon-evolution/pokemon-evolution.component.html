@@ -33,11 +33,97 @@
     </div>
     }
 
+    <!-- 🟣 CASO 1.5: FILHO ÚNICO QUE TEM EVOLUÇÕES PARALELAS (Ralts → Kirlia → 2 evoluções) -->
+    @else if (node.children?.length === 1 && node.children[0].isParallel) {
+
+    <div class="evo-column">
+      <!-- Pai -->
+      <div class="evo-card small">
+        <img [src]="node.image" [alt]="node.name" class="evo-img" />
+        <p class="evo-name">{{ node.name | titlecase }}</p>
+      </div>
+
+      <div class="arrow-wrapper">
+        <span class="arrow">↓</span>
+      </div>
+
+      <!-- Filho (Kirlia) -->
+      <div class="evo-card small">
+        <img
+          [src]="node.children[0].image"
+          [alt]="node.children[0].name"
+          class="evo-img"
+        />
+        <p class="evo-name">{{ node.children[0].name | titlecase }}</p>
+
+        @if (node.children[0].details) {
+        <p class="evo-details">{{ node.children[0].details }}</p>
+        }
+      </div>
+
+      <div class="arrow-wrapper">
+        <span class="arrow">↓</span>
+      </div>
+
+      <!-- Grid com as evoluções paralelas -->
+      <div class="evo-grid parallel">
+        @for (child of node.children[0].children; track child.name) {
+        <ng-container
+          *ngTemplateOutlet="renderNode; context: { node: child }"
+        ></ng-container>
+        }
+      </div>
+    </div>
+    }
+
+    <!-- 🟢 CASO 1.6: FILHO ÚNICO, MAS ESSE FILHO TEM 2 EVOLUÇÕES COM 1 FINAL CADA (Wurmple) -->
+    @else if ( node.children?.length === 1 && node.children[0].children?.length
+    === 2 && node.children[0].children[0].children?.length === 1 &&
+    node.children[0].children[1].children?.length === 1 ) {
+
+    <div class="evo-column">
+      <!-- Pai -->
+      <div class="evo-card small">
+        <img [src]="node.image" class="evo-img" />
+        <p class="evo-name">{{ node.name | titlecase }}</p>
+      </div>
+
+      <div class="arrow-wrapper">
+        <span class="arrow">↓</span>
+      </div>
+
+      <!-- Grid com Silcoon e Cascoon -->
+      <div class="evo-grid parallel-branches">
+        @for (branch of node.children[0].children; track branch.name) {
+        <div class="branch-column">
+          <!-- Intermediário (Silcoon / Cascoon) -->
+          <div class="evo-card small">
+            <img [src]="branch.image" class="evo-img" />
+            <p class="evo-name">{{ branch.name | titlecase }}</p>
+          </div>
+
+          <div class="arrow-wrapper small">
+            <span class="arrow">↓</span>
+          </div>
+
+          <!-- Final (Beautifly / Dustox) -->
+          <ng-container
+            *ngTemplateOutlet="
+              renderNode;
+              context: { node: branch.children[0] }
+            "
+          ></ng-container>
+        </div>
+        }
+      </div>
+    </div>
+    }
+
     <!-- 🔵 CASO 2: EVOLUÇÃO EM LINHA (CHARMANDER, ETC.) -->
     @else if (node.children?.length === 1) {
 
+    <!-- CASO NORMAL EM LINHA -->
     <div class="evo-inline">
-      <!-- Pai -->
       <div class="evo-card small">
         <img [src]="node.image" [alt]="node.name" class="evo-img" />
         <p class="evo-name">{{ node.name | titlecase }}</p>
@@ -45,22 +131,19 @@
 
       <span class="arrow-inline">→</span>
 
-      <!-- Filho único -->
       <ng-container
         *ngTemplateOutlet="renderNode; context: { node: node.children[0] }"
       ></ng-container>
     </div>
-
     }
 
     <!-- 🔸 CASO 3: NÓ FINAL (SEM FILHOS) -->
     @else {
-
     <div class="evo-card">
       <img [src]="node.image" [alt]="node.name" class="evo-img" />
       <p class="evo-name">{{ node.name | titlecase }}</p>
       @if (node.details) {
-        <p class="evo-details">{{ node.details }}</p>
+      <p class="evo-details">{{ node.details }}</p>
       }
     </div>
 
