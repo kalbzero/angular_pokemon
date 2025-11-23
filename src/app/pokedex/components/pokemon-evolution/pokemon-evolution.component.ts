@@ -14,4 +14,8 @@ export class PokemonEvolutionComponent {
 
   // evolutionList = this.#pokemonStore.evolutionList;
   public evolutionTree = this.#pokemonStore.evolutionTree;
+
+  public searchPokemonName(name: string): void {
+    this.#pokemonStore.fetchPokemon(name);
+  }
 }

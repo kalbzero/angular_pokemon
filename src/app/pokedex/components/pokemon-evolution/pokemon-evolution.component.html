@@ -14,7 +14,7 @@
     @if (node.isParallel) {
 
     <!-- Pai -->
-    <div class="evo-card parent">
+    <div class="evo-card parent" (click)="searchPokemonName(node.name)">
       <img [src]="node.image" [alt]="node.name" class="evo-img" />
       <p class="evo-name">{{ node.name | titlecase }}</p>
     </div>
@@ -29,7 +29,7 @@
       @for (child of node.children; track child.name) {
       <div class="branch-column">
         <!-- intermediário (ex: Silcoon / Cascoon) -->
-        <div class="evo-card small">
+        <div class="evo-card small" (click)="searchPokemonName(child.name)">
           <img [src]="child.image" [alt]="child.name" class="evo-img" />
           <p class="evo-name">{{ child.name | titlecase }}</p>
           @if (child.details) {
@@ -64,7 +64,7 @@
 
     <div class="evo-column">
       <!-- Pai -->
-      <div class="evo-card small">
+      <div class="evo-card small" (click)="searchPokemonName(node.name)">
         <img [src]="node.image" [alt]="node.name" class="evo-img" />
         <p class="evo-name">{{ node.name | titlecase }}</p>
       </div>
@@ -74,7 +74,7 @@
       </div>
 
       <!-- Filho (Kirlia) -->
-      <div class="evo-card small">
+      <div class="evo-card small" (click)="searchPokemonName(node.children[0].name)">
         <img
           [src]="node.children[0].image"
           [alt]="node.children[0].name"
@@ -107,7 +107,7 @@
 
     <!-- CASO NORMAL EM LINHA -->
     <div class="evo-inline">
-      <div class="evo-card small">
+      <div class="evo-card small" (click)="searchPokemonName(node.name)">
         <img [src]="node.image" [alt]="node.name" class="evo-img" />
         <p class="evo-name">{{ node.name | titlecase }}</p>
       </div>
@@ -122,7 +122,7 @@
 
     <!-- 🔸 CASO 3: NÓ FINAL (SEM FILHOS) -->
     @else {
-    <div class="evo-card">
+    <div class="evo-card" (click)="searchPokemonName(node.name)">
       <img [src]="node.image" [alt]="node.name" class="evo-img" />
       <p class="evo-name">{{ node.name | titlecase }}</p>
       @if (node.details) {
