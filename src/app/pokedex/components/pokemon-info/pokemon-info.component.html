@@ -30,12 +30,10 @@
     <div class="info-item">
       <strong
         >Happiness Base:
-        <span
-          class="info-icon"
-          data-tooltip="0 = minimum, 70 = default value, 140 = Pokémon obtained through high friendship or special events, 255 = maximum possible friendship."
+        <app-tooltip
+          text="0 = minimum, 70 = default, 140 = high friendship, 255 = maximum possible"
         >
-          ⓘ
-        </span>
+        </app-tooltip>
       </strong>
 
       <span>{{ species().base_happiness }}</span>
@@ -66,10 +64,8 @@
 
     <div class="info-item">
       <strong>Habitat:</strong>
-      @if(species().habitat) {
-
-      } @else {
-        <span>None</span>
+      @if(species().habitat) { } @else {
+      <span>None</span>
       }
     </div>
   </div>

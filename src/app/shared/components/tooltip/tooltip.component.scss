@@ -1,0 +1,59 @@
+.tooltip-icon {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Caixa do tooltip */
+.tooltip-box {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  position: absolute;
+
+  left: 50%;
+  top: -10px;
+  transform: translate(-50%, -100%);
+
+  background: #333;
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 8px;
+
+  width: 180px;          /* 🔥 largura controlada */
+  white-space: normal;   /* 🔥 quebra de linha automática */
+  text-align: left;
+  line-height: 1.3;
+  font-size: 0.75rem;
+
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* Triângulo */
+.tooltip-icon::after {
+  content: "";
+  visibility: hidden;
+  opacity: 0;
+
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  transform: translateX(-50%);
+
+  border-width: 6px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+
+  transition: opacity 0.2s ease;
+}
+
+/* Hover → mostra */
+.tooltip-icon:hover .tooltip-box,
+.tooltip-icon:hover::after {
+  visibility: visible;
+  opacity: 1;
+}

@@ -11,11 +11,12 @@ import { CommonModule, TitleCasePipe } from '@angular/common';
 import { PokemonService } from '../../../shared/providers/pokemon.service';
 import { PokemonStore } from '../../../shared/store/pokemon-store.service';
 import { IPokemonMove } from '../../../shared/interfaces/IPokemonMove';
+import { TooltipComponent } from '../../../shared/components/tooltip/tooltip.component';
 
 @Component({
   selector: 'pokemon-move-modal',
   standalone: true,
-  imports: [CommonModule, TitleCasePipe],
+  imports: [CommonModule, TitleCasePipe, TooltipComponent],
   templateUrl: './pokemon-move-modal.component.html',
   styleUrl: './pokemon-move-modal.component.scss',
 })

@@ -2,11 +2,12 @@ import { Component, computed, inject, input } from '@angular/core';
 import { IPokemon } from '../../../shared/interfaces/IPokemon';
 import { PokemonStore } from '../../../shared/store/pokemon-store.service';
 import { CommonModule, TitleCasePipe } from '@angular/common';
+import { TooltipComponent } from '../../../shared/components/tooltip/tooltip.component';
 
 @Component({
   selector: 'pokemon-info',
   standalone: true,
-  imports: [CommonModule, TitleCasePipe],
+  imports: [CommonModule, TitleCasePipe, TooltipComponent],
   templateUrl: './pokemon-info.component.html',
   styleUrls: ['./pokemon-info.component.scss'],
 })

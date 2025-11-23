@@ -24,7 +24,14 @@
       <span>{{ move()?.accuracy ?? "—" }}%</span>
     </div>
     <div class="stat">
-      <label>PP</label>
+      <label>
+        PP
+        <app-tooltip
+        text="PP (Power Points): number of times a move can be used before it runs out."
+      >
+      </app-tooltip>
+      </label>
+      
       <span>{{ move()?.pp }}</span>
     </div>
     <div class="stat">
