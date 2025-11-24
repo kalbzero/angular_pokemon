@@ -64,6 +64,14 @@ O build ficará em:
 
 ------------------------------------------------------------------------
 
+ ## 4 Rodar os testes
+
+ ```bash
+ ng test --watch=false --browsers=ChromeHeadless
+ ```
+
+------------------------------------------------------------------------
+
 ## 🎨 Por que fiz certas escolhas
 
 ### 🔹 **Uso de standalone components**
