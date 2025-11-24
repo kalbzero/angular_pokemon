@@ -20,8 +20,7 @@ describe('PokedexComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PokedexComponent],
       providers: [{ provide: PokemonStore, useValue: mockStore }],
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PokedexComponent);
     component = fixture.componentInstance;
@@ -32,7 +31,7 @@ describe('PokedexComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('deve chamar store.fetchPokemon quando search tiver valor', () => {
+  it('should call store.fetchPokemon when search has value', () => {
     component.search = 'pikachu';
 
     component.buscar();
@@ -40,7 +39,7 @@ describe('PokedexComponent', () => {
     expect(mockStore.fetchPokemon).toHaveBeenCalledWith('pikachu');
   });
 
-  it('não deve chamar store.fetchPokemon quando search estiver vazio', () => {
+  it('should not call store.fetchPokemon when search is empty', () => {
     component.search = '';
 
     component.buscar();
@@ -48,11 +47,40 @@ describe('PokedexComponent', () => {
     expect(mockStore.fetchPokemon).not.toHaveBeenCalled();
   });
 
-  it('não deve chamar store.fetchPokemon quando search tiver só espaços', () => {
+  it('should not call store.fetchPokemon when search has only spaces', () => {
     component.search = '   ';
 
     component.buscar();
 
     expect(mockStore.fetchPokemon).not.toHaveBeenCalled();
+  });
+
+  it('should call buscar() when the button is clicked', () => {
+    spyOn(component, 'buscar');
+    fixture.detectChanges();
+
+    const button: HTMLButtonElement =
+      fixture.nativeElement.querySelector('button');
+    button.click();
+    fixture.detectChanges();
+
+    expect(component.buscar).toHaveBeenCalled();
+  });
+
+  // Testes para o spinner de loading
+  it('should display the spinner when store.loading() returns true', () => {
+    mockStore.loading.and.returnValue(true);
+    fixture.detectChanges();
+
+    const spinner = fixture.nativeElement.querySelector('.loading-overlay');
+    expect(spinner).toBeTruthy();
+  });
+
+  it('should not display the spinner when store.loading() returns false', () => {
+    mockStore.loading.and.returnValue(false);
+    fixture.detectChanges();
+
+    const spinner = fixture.nativeElement.querySelector('.loading-overlay');
+    expect(spinner).toBeFalsy();
   });
 });
