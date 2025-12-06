@@ -1,0 +1,21 @@
+{
+  "default_model": "qwen/qwen2.5-coder-7b-instruct",
+  "rule_scope": "global",
+  "rules": [
+    {
+      "pattern": ".*",
+      "ai_directives": [
+        "NÃO use task_progress a menos que o usuário peça explicitamente.",
+        "Antes de responder, leia SOMENTE os arquivos que o usuário citar ou que o teste reclamar.",
+        "Proíba criar arquivos novos sem que o usuário peça.",
+        "Quando corrigir um erro, aplique mudanças mínimas e incrementais.",
+        "Evite reescrever blocos de código inteiros.",
+        "Evite gerar imports extensos ou dependências inexistentes.",
+        "Quando houver erro de teste, explique primeiro a causa provável, só depois proponha o patch.",
+        "Peça permissão antes de editar qualquer arquivo.",
+        "Em testes unitários: foque em mocks, spies, initialization e providers.",
+        "Se faltar contexto, peça qual arquivo deve ser lido."
+      ]
+    }
+  ]
+}
