@@ -4,7 +4,8 @@ import { PokemonCardComponent } from './pokemon-card.component';
 import { PokemonStore } from '../../../shared/store/pokemon-store.service';
 import { IPokemon } from '../../../shared/interfaces/IPokemon';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 class MockPokemonStore {
   typeData = jasmine.createSpy('typeData').and.returnValue({
@@ -37,8 +38,12 @@ fdescribe('PokemonCardComponent', () => {
     mockStore = new MockPokemonStore();
     await TestBed.configureTestingModule({
       // declarations: [PokemonCardComponent],
-      imports: [PokemonCardComponent, HttpClientTestingModule],
-      providers: [{ provide: PokemonStore, useValue: mockStore }],
+      imports: [PokemonCardComponent],
+      providers: [
+        { provide: PokemonStore, useValue: mockStore },
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA], // <-- ignora componentes filhos,que são irrelevantes para o teste atual
     }).compileComponents();
 
