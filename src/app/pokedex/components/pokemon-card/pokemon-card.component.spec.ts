@@ -29,7 +29,7 @@ class MockPokemonStore {
   fetchPokemon = jasmine.createSpy('fetchPokemon').and.returnValue(null);
 }
 
-fdescribe('PokemonCardComponent', () => {
+describe('PokemonCardComponent', () => {
   let component: PokemonCardComponent;
   let fixture: ComponentFixture<PokemonCardComponent>;
   let mockStore: MockPokemonStore;
