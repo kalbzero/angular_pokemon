@@ -20,7 +20,8 @@
     </div>
 
     <div class="arrow-wrapper">
-      <span class="arrow">↓</span>
+      <span class="arrow">↙</span>
+      <span class="arrow">↘</span>
     </div>
 
     <!-- Se for paralelo onde cada filho tem 1 final (Wurmple) -->
@@ -74,7 +75,10 @@
       </div>
 
       <!-- Filho (Kirlia) -->
-      <div class="evo-card small" (click)="searchPokemonName(node.children[0].name)">
+      <div
+        class="evo-card small"
+        (click)="searchPokemonName(node.children[0].name)"
+      >
         <img
           [src]="node.children[0].image"
           [alt]="node.children[0].name"
@@ -88,7 +92,8 @@
       </div>
 
       <div class="arrow-wrapper">
-        <span class="arrow">↓</span>
+        <span class="arrow">↙</span>
+        <span class="arrow">↘</span>
       </div>
 
       <!-- Grid com as evoluções paralelas -->
