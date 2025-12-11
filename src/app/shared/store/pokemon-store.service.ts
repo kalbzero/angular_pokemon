@@ -63,8 +63,8 @@ export class PokemonStore {
   constructor() {
     effect(() => {
       const poke = this.pokemon();
-      if (!poke) return;
       this.abilities.set([]);
+      if (!poke) return;
       poke.abilities.forEach((ab) => {
         this.#pokemonService
           .getAbility(ab.ability.name)

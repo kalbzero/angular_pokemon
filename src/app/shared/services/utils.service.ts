@@ -5,7 +5,7 @@ import { IPokemonTypeRelations } from '../interfaces/IPokemonTypeRelations';
 @Injectable({
   providedIn: 'root',
 })
-export class UtilsService {
+export class UtilsService { 
   /**
    * Calcula fraquezas, resistências e imunidades
    * combinando 1 ou 2 tipos simultaneamente.

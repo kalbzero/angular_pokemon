@@ -4,7 +4,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { PokemonMovesComponent } from './pokemon-moves.component';
 import { IPokemon } from '../../../shared/interfaces/IPokemon';
 
-fdescribe('PokemonMovesComponent', () => {
+describe('PokemonMovesComponent', () => {
   let component: PokemonMovesComponent;
   let fixture: ComponentFixture<PokemonMovesComponent>;
 
