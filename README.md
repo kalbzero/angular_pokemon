@@ -222,7 +222,7 @@ Main page (Pokemon Games):
 
 ## 🧪 Next steps (possible developments)
 
--   List of the name`s Pokémon listing in searchbar.
+-   Autocomplete list in searchbar ✅
 -   Create a complete details page ✅
 -   Compare Pokémon side-by-side.
 -   Login page to create your Pokémon team.

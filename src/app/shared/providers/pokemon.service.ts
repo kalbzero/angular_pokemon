@@ -49,4 +49,10 @@ export class PokemonService {
   public getPokemonEvolutionChain(id: number): Observable<IPokemonEvolutionChain> {
     return this.http.get<IPokemonEvolutionChain>(`${this.baseUrl}evolution-chain/${id}`);
   }
+
+  public getPokemonList(limit: number = 1025): Observable<{ results: { name: string; url: string }[] }> {
+    return this.http.get<{ results: { name: string; url: string }[] }>(
+      `${this.baseUrl}pokemon/?limit=${limit}`
+    );
+  }
 }

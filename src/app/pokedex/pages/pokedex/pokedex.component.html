@@ -2,14 +2,27 @@
   <h1 class="pokedex-title">Pokédex</h1>
 
   <div class="search-area">
-    <input
-      [(ngModel)]="search"
-      placeholder="Digite o nome do Pokémon"
-      (keyup.enter)="buscar()"
-      class="search"
-    />
+    <div class="search-container">
+      <input
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event)"
+        placeholder="Type Pokémon name or ID"
+        (keyup.enter)="searchbar()"
+        class="search"
+      />
 
-    <button class="btn-search" (click)="buscar()">Buscar</button>
+      <button class="btn-search" (click)="searchbar()">Search</button>
+
+      @if (filteredList().length > 0) {
+        <ul class="autocomplete-list">
+          @for (pokemon of filteredList(); track pokemon.name) {
+            <li (click)="selectPokemon(pokemon.name)" class="autocomplete-item">
+              {{ pokemon.name }}
+            </li>
+          }
+        </ul>
+      }
+    </div>
   </div>
 </div>
 

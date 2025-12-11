@@ -193,7 +193,7 @@ describe('PokemonStore', () => {
     it('should handle 404 error with appropriate message', async () => {
       pokemonService.getPokemon.and.returnValue(throwError(() => ({ status: 404 })));
       await store.fetchPokemon('nonexistent');
-      expect(toastService.show).toHaveBeenCalledWith("O Pokémon 'nonexistent' não existe.", 'error');
+      expect(toastService.show).toHaveBeenCalledWith("The Pokémon 'nonexistent' does not exist.", 'error');
       expect(store.pokemon()).toBeUndefined();
       expect(store.typeData()).toEqual({} as any);
     });
@@ -203,7 +203,7 @@ describe('PokemonStore', () => {
         throwError(() => ({ message: 'not-found' }))
       );
       await store.fetchPokemon('invalid');
-      expect(toastService.show).toHaveBeenCalledWith("O Pokémon 'invalid' não existe.", 'error');
+      expect(toastService.show).toHaveBeenCalledWith("The Pokémon 'invalid' does not exist.", 'error');
     });
 
     it('should handle generic error', async () => {
@@ -211,7 +211,7 @@ describe('PokemonStore', () => {
         throwError(() => ({ status: 500, message: 'Server error' }))
       );
       await store.fetchPokemon('bulbasaur');
-      expect(toastService.show).toHaveBeenCalledWith('Pokémon não encontrado.', 'error');
+      expect(toastService.show).toHaveBeenCalledWith('Pokémon not founded.', 'error');
       expect(store.pokemon()).toBeUndefined();
     });
 

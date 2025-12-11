@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PokedexComponent } from './pokedex.component';
 import { PokemonStore } from '../../../shared/store/pokemon-store.service';
+import { PokemonService } from '../../../shared/providers/pokemon.service';
+import { of } from 'rxjs';
 
 class MockPokemonStore {
   fetchPokemon = jasmine.createSpy('fetchPokemon');
@@ -9,17 +11,28 @@ class MockPokemonStore {
   pokemon = jasmine.createSpy('pokemon').and.returnValue(null);
 }
 
+class MockPokemonService {
+  getPokemonList = jasmine.createSpy('getPokemonList').and.returnValue(
+    of({ results: [] })
+  );
+}
+
 describe('PokedexComponent', () => {
   let component: PokedexComponent;
   let fixture: ComponentFixture<PokedexComponent>;
   let mockStore: MockPokemonStore;
+  let mockPokemonService: MockPokemonService;
 
   beforeEach(async () => {
     mockStore = new MockPokemonStore();
+    mockPokemonService = new MockPokemonService();
 
     await TestBed.configureTestingModule({
       imports: [PokedexComponent],
-      providers: [{ provide: PokemonStore, useValue: mockStore }],
+      providers: [
+        { provide: PokemonStore, useValue: mockStore },
+        { provide: PokemonService, useValue: mockPokemonService },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(PokedexComponent);
@@ -32,31 +45,31 @@ describe('PokedexComponent', () => {
   });
 
   it('should call store.fetchPokemon when search has value', () => {
-    component.search = 'pikachu';
+    component.search.set('pikachu');
 
-    component.buscar();
+    component.searchbar();
 
     expect(mockStore.fetchPokemon).toHaveBeenCalledWith('pikachu');
   });
 
   it('should not call store.fetchPokemon when search is empty', () => {
-    component.search = '';
+    component.search.set('');
 
-    component.buscar();
+    component.searchbar();
 
     expect(mockStore.fetchPokemon).not.toHaveBeenCalled();
   });
 
   it('should not call store.fetchPokemon when search has only spaces', () => {
-    component.search = '   ';
+    component.search.set('   ');
 
-    component.buscar();
+    component.searchbar();
 
     expect(mockStore.fetchPokemon).not.toHaveBeenCalled();
   });
 
-  it('should call buscar() when the button is clicked', () => {
-    spyOn(component, 'buscar');
+  it('should call searchbar() when the button is clicked', () => {
+    spyOn(component, 'searchbar');
     fixture.detectChanges();
 
     const button: HTMLButtonElement =
@@ -64,7 +77,7 @@ describe('PokedexComponent', () => {
     button.click();
     fixture.detectChanges();
 
-    expect(component.buscar).toHaveBeenCalled();
+    expect(component.searchbar).toHaveBeenCalled();
   });
 
   // Testes para o spinner de loading

@@ -108,9 +108,9 @@ export class PokemonStore {
       const is404 = e?.status === 404 || e?.message === 'not-found';
 
       if (is404) {
-        this.#toastService.show(`O Pokémon '${name}' não existe.`, 'error');
+        this.#toastService.show(`The Pokémon '${name}' does not exist.`, 'error');
       } else {
-        this.#toastService.show('Pokémon não encontrado.', 'error');
+        this.#toastService.show('Pokémon not founded.', 'error');
       }
       this.pokemon.set(undefined);
       this.typeData.set({} as IPokemonTypeRelations);
