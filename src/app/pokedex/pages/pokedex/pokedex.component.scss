@@ -33,7 +33,17 @@
 /* Search Container with Autocomplete */
 .search-container {
   position: relative;
-  width: 260px;
+  width: 330px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Wrapper around input so autocomplete width matches input only */
+.search-input-wrapper {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 /* Input */
@@ -42,7 +52,8 @@
   border-radius: 10px;
   border: 2px solid #2a75bb;
   font-size: 16px;
-  width: 100%;
+  flex: 1 1 auto;
+  min-width: 208px; /* allow shrinking inside flex container */
   outline: none;
 }
 
@@ -51,11 +62,11 @@
   position: absolute;
   top: 100%;
   left: 0;
-  right: 0;
+  width: 100%;
   background: white;
   border: 2px solid #2a75bb;
   border-top: none;
-  border-radius: 0 0 10px 10px;
+  border-radius: 10px 10px;
   max-height: 300px;
   overflow-y: auto;
   z-index: 1000;

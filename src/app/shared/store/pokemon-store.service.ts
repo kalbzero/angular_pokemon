@@ -140,11 +140,10 @@ export class PokemonStore {
     return this.pokemon()!.id;
   }
 
-  /* Carrega a species */
   private loadSpecies(id: number) {
     this.#pokemonService.getPokemonSpecies(id).subscribe((sp) => {
       this.species.set(sp);
-      /* Carrega a cadeia evolutiva */
+      /* Load the evolution chain */
       const evolutionUrl = sp.evolution_chain.url;
       const evoId = evolutionUrl.split('/').filter(Boolean).pop();
       if (evoId) {

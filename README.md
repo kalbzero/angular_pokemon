@@ -1,6 +1,6 @@
-# Pokédex (Angular v19)
+# Pokédex (Angular v20)
 
-A Pokédex built with Angular 19 and loaded with references 
+A Pokédex built with Angular 20 and loaded with references 
 to the Pokémon universe!\
 This project was created to demonstrate knowledge of Angular standalone, 
 reactive components, integration with external APIs, and good architectural 
@@ -22,9 +22,9 @@ and UI/UX practices.
 
   Tecnology        Version
   ---------------- --------
-  **Angular**      19.1.5
-  **Typescript**   5.x
-  **RxJS**         7.x
+  **Angular**      20.3.15
+  **Typescript**   5.9.3
+  **RxJS**         7.8.0
   **PokéAPI**      v2
   **SCSS**         custom
 

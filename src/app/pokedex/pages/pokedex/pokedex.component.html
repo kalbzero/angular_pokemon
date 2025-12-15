@@ -3,25 +3,27 @@
 
   <div class="search-area">
     <div class="search-container">
-      <input
-        [ngModel]="search()"
-        (ngModelChange)="search.set($event)"
-        placeholder="Type Pokémon name or ID"
-        (keyup.enter)="searchbar()"
-        class="search"
-      />
+      <div class="search-input-wrapper">
+        <input
+          [ngModel]="search()"
+          (ngModelChange)="search.set($event)"
+          placeholder="Type Pokémon name or ID"
+          (keyup.enter)="searchbar()"
+          class="search"
+        />
+
+        @if (filteredList().length > 0) {
+          <ul class="autocomplete-list">
+            @for (pokemon of filteredList(); track pokemon.name) {
+              <li (click)="selectPokemon(pokemon.name)" class="autocomplete-item">
+                {{ pokemon.name }}
+              </li>
+            }
+          </ul>
+        }
+      </div>
 
       <button class="btn-search" (click)="searchbar()">Search</button>
-
-      @if (filteredList().length > 0) {
-        <ul class="autocomplete-list">
-          @for (pokemon of filteredList(); track pokemon.name) {
-            <li (click)="selectPokemon(pokemon.name)" class="autocomplete-item">
-              {{ pokemon.name }}
-            </li>
-          }
-        </ul>
-      }
     </div>
   </div>
 </div>
