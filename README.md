@@ -20,13 +20,13 @@ and UI/UX practices.
 
 ## 🚀 Tecnologies
 
-  Tecnology        Version
-  ---------------- --------
-  **Angular**      20.3.15
-  **Typescript**   5.9.3
-  **RxJS**         7.8.0
-  **PokéAPI**      v2
-  **SCSS**         custom
+  | Tecnology     | Version     |
+  | ------------- | ----------- |
+  | **Angular**   |   20.3.15   |
+  | **Typescript**|   5.9.3     |
+  | **RxJS**      |   7.8.0     |
+  | **PokéAPI**   |   v2        |
+  | **SCSS**      |   custom    |
 
 ------------------------------------------------------------------------
 
