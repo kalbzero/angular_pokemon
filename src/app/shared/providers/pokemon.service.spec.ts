@@ -1,8 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpTestingController } from '@angular/common/http/testing';
 
 import { PokemonService } from './pokemon.service';
 
@@ -13,7 +10,7 @@ describe('PokemonService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [],
       providers: [PokemonService],
     });
     service = TestBed.inject(PokemonService);
@@ -287,7 +284,12 @@ describe('PokemonService', () => {
       const mockAbility = {
         id: 9,
         name: 'blaze',
-        effect_entries: [{ effect: 'Fire-type moves deal 1.5x damage', language: { name: 'en' } }],
+        effect_entries: [
+          {
+            effect: 'Fire-type moves deal 1.5x damage',
+            language: { name: 'en' },
+          },
+        ],
         pokemon: [{ pokemon: { name: 'charmander' } }],
       } as any;
 
@@ -433,7 +435,9 @@ describe('PokemonService', () => {
       service.getPokemonEvolutionChain(2).subscribe((chain) => {
         expect(chain.chain.evolves_to.length).toBe(1);
         expect(chain.chain.evolves_to[0].species.name).toBe('charmeleon');
-        expect(chain.chain.evolves_to[0].evolves_to[0].species.name).toBe('charizard');
+        expect(chain.chain.evolves_to[0].evolves_to[0].species.name).toBe(
+          'charizard'
+        );
       });
 
       const req = httpMock.expectOne(`${baseUrl}evolution-chain/2`);
@@ -448,17 +452,29 @@ describe('PokemonService', () => {
           evolves_to: [
             {
               species: { name: 'vaporeon' },
-              evolution_details: [{ trigger: { name: 'use-item' }, item: { name: 'water-stone' } }],
+              evolution_details: [
+                {
+                  trigger: { name: 'use-item' },
+                  item: { name: 'water-stone' },
+                },
+              ],
               evolves_to: [],
             },
             {
               species: { name: 'jolteon' },
-              evolution_details: [{ trigger: { name: 'use-item' }, item: { name: 'thunder-stone' } }],
+              evolution_details: [
+                {
+                  trigger: { name: 'use-item' },
+                  item: { name: 'thunder-stone' },
+                },
+              ],
               evolves_to: [],
             },
             {
               species: { name: 'flareon' },
-              evolution_details: [{ trigger: { name: 'use-item' }, item: { name: 'fire-stone' } }],
+              evolution_details: [
+                { trigger: { name: 'use-item' }, item: { name: 'fire-stone' } },
+              ],
               evolves_to: [],
             },
           ],

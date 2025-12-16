@@ -8,7 +8,7 @@ import { IPokemon } from '../interfaces/IPokemon';
 import { IPokemonTypeRelations } from '../interfaces/IPokemonTypeRelations';
 import { IPokemonAbility } from '../interfaces/IPokemonAbility';
 import { IPokemonSpecies } from '../interfaces/IPokemonSpecies';
-import { IPokemonEvolutionChain, EvolutionNode } from '../interfaces/IPokemonEvolutionChain';
+import { IPokemonEvolutionChain } from '../interfaces/IPokemonEvolutionChain';
 
 describe('PokemonStore', () => {
   let store: PokemonStore;
