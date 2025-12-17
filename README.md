@@ -6,6 +6,8 @@ This project was created to demonstrate knowledge of Angular standalone,
 reactive components, integration with external APIs, and good architectural 
 and UI/UX practices.
 
+![Logo](public/assets/images/logo.png)
+
 ------------------------------------------------------------------------
 
 
@@ -93,8 +95,8 @@ I chose Signals because:
 
 ### 🔹 **Layout inspired by the Pokémon anime**
 
--   Header with classic font and colors from the series.\
--   Animated Poké Ball as loading screen..\
+-   Header with classic font and colors from the series.
+-   Animated Poké Ball as loading screen.
 -   Light and fun aesthetic, yet still responsive.
 
 ### 🔹 Evolution of Pokémon with a dynamic grid.
@@ -124,9 +126,9 @@ styled with a Poké Ball.
 
 The project uses signals in the `PokemonStore` for simple state management: 
 
-- loading\
-- error\
-- pokemon\
+- loading
+- error
+- pokemon
 - type data
 
 This reduces the need for complex services or NgRx for something small.
@@ -232,10 +234,10 @@ Main page (Pokemon Games):
 
 ## 🤝 Contribution
 
--   Fork the projetc.\
--   Create your branch: git checkout -b feature/minha-feature \
--   Commit: git commit -m 'Adiciona minha feature' \
--   Push: git push origin feature/minha-feature \
+-   Fork the projetc.
+-   Create your branch: git checkout -b feature/minha-feature 
+-   Commit: git commit -m 'Adiciona minha feature' 
+-   Push: git push origin feature/minha-feature 
 -   Open a Pull Request
 
 ------------------------------------------------------------------------
@@ -243,7 +245,7 @@ Main page (Pokemon Games):
 ## ⚡ Author
 
 Projetc created by **Edward Ramos** as a demonstration of proficiency in 
-Angular 19, UI/UX, and API integration.
+Angular 20, UI/UX, and API integration.
 
 ------------------------------------------------------------------------
 
