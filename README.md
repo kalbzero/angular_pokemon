@@ -13,7 +13,7 @@ and UI/UX practices.
 
 ## 🔰 Badges
 
-![Angular](https://img.shields.io/badge/Angular-19-dd0031?style=for-the-badge&logo=angular)
+![Angular](https://img.shields.io/badge/Angular-20-dd0031?style=for-the-badge&logo=angular)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
