@@ -5,6 +5,8 @@
     <div class="search-container">
       <div class="search-input-wrapper">
         <input
+          id="search-input"
+          name="search-input"
           [ngModel]="search()"
           (ngModelChange)="search.set($event)"
           placeholder="Type Pokémon name or ID"
