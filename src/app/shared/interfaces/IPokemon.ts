@@ -92,7 +92,7 @@ export interface Sprites {
     front_shiny?: string | null;
     front_shiny_female?: string | null;
     other?: SpritesOther;
-    versions?: Record<string, any>; // estrutura muito grande e variada -> mantido genérico
+    versions?: Record<string, any>; // very large and varied structure -> kept generic
 }
 
 export interface SpritesOther {

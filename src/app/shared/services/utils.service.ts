@@ -16,23 +16,23 @@ export class UtilsService {
     typeResponses.forEach((type) => {
       const relations = type.damage_relations;
 
-      // Fraqueza: toma 2x
+      // Weakness: take 2x
       relations.double_damage_from.forEach((t) => {
         this.addMultiplier(damageMap, t.name, 2);
       });
 
-      // Resistência: toma 0.5x
+      // Resistance: take 0.5x
       relations.half_damage_from.forEach((t) => {
         this.addMultiplier(damageMap, t.name, 0.5);
       });
 
-      // Imunidade: toma 0x
+      // Imunity: take 0x
       relations.no_damage_from.forEach((t) => {
         damageMap[t.name] = 0;
       });
     });
 
-    // Converte o mapa para listas amigáveis
+    // Convert the map to the friendly structure
     const weaknesses: string[] = [];
     const resistances: string[] = [];
     const immunities: string[] = [];
@@ -41,10 +41,10 @@ export class UtilsService {
       if (value === 0) {
         immunities.push(type);
       } else if (value > 1) {
-        // inclui x4, x2, x1.5...
+        // includes x4, x2, x1.5...
         weaknesses.push(`${type} (x${value})`);
       } else if (value < 1) {
-        // inclui x0.5, x0.25
+        // includes x0.5, x0.25
         resistances.push(`${type} (x${value})`);
       }
     }
@@ -67,14 +67,14 @@ export class UtilsService {
     type: string,
     multiplier: number
   ) {
-    if (map[type] === 0) return; // imunidade é absoluta
+    if (map[type] === 0) return; // imunity is absolute
 
     if (!map[type]) {
       map[type] = multiplier;
     } else {
       map[type] *= multiplier;
 
-      // Se multiplicação resultar exatamente em 1, remove como neutro
+      // If the multiplication results in exactly 1, remove it as the neutral.
       if (map[type] === 1) {
         delete map[type];
       }

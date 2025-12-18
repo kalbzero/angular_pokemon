@@ -1,7 +1,7 @@
 @use "sass:color";
 
 /* -----------------------------
-   PALETA DE CORES DOS TIPOS
+   TYPE COLORS PALETTE
 ------------------------------ */
 $type-colors: (
   normal: #a8a77a,
@@ -25,20 +25,20 @@ $type-colors: (
 );
 
 /* -----------------------------
-   FUNÇÃO — TEXTO VISÍVEL EM QUALQUER FUNDO
+   FUNCTION — TEXT VISIBLE ON ANY BACKGROUND
 ------------------------------ */
 @function readable-text-color($bg) {
   $l: color.channel($bg, "lightness", $space: hsl);
 
   @if ($l > 50) {
-    @return #222; // fundo claro -> texto escuro
+    @return #222; //  light bg -> dark text
   } @else {
-    @return #fff; // fundo escuro -> texto claro
+    @return #fff; // dark bg -> light text
   }
 }
 
 /* -----------------------------
-   CHIPS — GENÉRICOS
+   CHIPS — GENERIC
 ------------------------------ */
 .chip {
   padding: 6px 14px;
@@ -52,7 +52,7 @@ $type-colors: (
   justify-content: center;
 }
 
-/* CHIPS DOS TIPOS */
+/* TYPE CHIPS */
 .chip.type {
   @each $name, $color in $type-colors {
     &.#{$name} {
@@ -62,7 +62,7 @@ $type-colors: (
   }
 }
 
-/* CHIPS ESPECÍFICOS (FRAQUEZA / RESISTÊNCIA / IMUNIDADE) */
+/* SPECIFIC CHIPS (WEAKNESS / RESISTANCE / IMMUNITY) */
 .chip.weak {
   background: #e74c3c;
   color: #fff;
@@ -78,7 +78,7 @@ $type-colors: (
   color: #fff;
 }
 
-/* GRUPO DE CHIPS */
+/* CHIP GROUP */
 .chip-group {
   display: flex;
   flex-wrap: wrap;
@@ -86,7 +86,7 @@ $type-colors: (
 }
 
 /* -----------------------------
-   CARD — COMPONENTES E SEÇÕES
+   CARD — COMPONENTS AND SECTIONS
 ------------------------------ */
 .card {
   background: #ffffff;

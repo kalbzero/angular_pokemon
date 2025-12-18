@@ -10,7 +10,7 @@ import { CommonModule, TitleCasePipe } from '@angular/common';
 })
 export class PokemonStatsComponent {
   pokemon = input<IPokemon | undefined>();
-  private maxBaseStat = 255; // mmaximum base stat in Pokémon games
+  private maxBaseStat = 255; // maximum base stat in Pokémon games
 
   public getStatPercent(stat: number): number {
     return Math.round((stat / this.maxBaseStat) * 100);

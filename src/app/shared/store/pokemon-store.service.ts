@@ -231,7 +231,7 @@ export class PokemonStore {
           : 'Turn console upside down';
       }
 
-      // ⭐ Caso: Tyrogue → Hitmonlee/Hitmonchan/Hitmontop
+      // ⭐ Case: Tyrogue → Hitmonlee/Hitmonchan/Hitmontop
       if (
         evoDetails.relative_physical_stats !== null &&
         evoDetails.relative_physical_stats !== undefined
@@ -254,7 +254,7 @@ export class PokemonStore {
 
     const isParallel = children.length > 1;
 
-    // Agora o layoutClass realmente será enviado ao componente
+    // Now the layoutClass really will be sent to the component
     const layoutClass = isParallel
       ? children.length % 2 === 0
         ? 'grid-2'

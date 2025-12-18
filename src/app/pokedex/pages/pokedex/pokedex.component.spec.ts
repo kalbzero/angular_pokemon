@@ -80,7 +80,7 @@ describe('PokedexComponent', () => {
     expect(component.searchbar).toHaveBeenCalled();
   });
 
-  // Testes para o spinner de loading
+  // Tests to the spinner of the loading
   it('should display the spinner when store.loading() returns true', () => {
     mockStore.loading.and.returnValue(true);
     fixture.detectChanges();

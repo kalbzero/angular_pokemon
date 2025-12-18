@@ -37,14 +37,13 @@ describe('PokemonCardComponent', () => {
   beforeEach(async () => {
     mockStore = new MockPokemonStore();
     await TestBed.configureTestingModule({
-      // declarations: [PokemonCardComponent],
       imports: [PokemonCardComponent],
       providers: [
         { provide: PokemonStore, useValue: mockStore },
         provideHttpClient(),
         provideHttpClientTesting(),
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA], // <-- ignora componentes filhos,que são irrelevantes para o teste atual
+      schemas: [CUSTOM_ELEMENTS_SCHEMA], // <-- ignore children components, who are irrelevant for this test
     }).compileComponents();
 
     fixture = TestBed.createComponent(PokemonCardComponent);
@@ -95,11 +94,4 @@ describe('PokemonCardComponent', () => {
       ['grass', 0.5],
     ]);
   });
-
-  // it('não deve quebrar se pokemon = undefined', () => {
-  //   component.pokemon.set(undefined);
-  //   fixture.detectChanges();
-
-  //   expect(component).toBeTruthy(); // apenas garantindo que não deu erro
-  // });
 });

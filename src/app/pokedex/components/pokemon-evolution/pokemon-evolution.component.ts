@@ -12,7 +12,6 @@ import { PokemonStore } from '../../../shared/store/pokemon-store.service';
 export class PokemonEvolutionComponent {
   #pokemonStore = inject(PokemonStore);
 
-  // evolutionList = this.#pokemonStore.evolutionList;
   public evolutionTree = this.#pokemonStore.evolutionTree;
 
   public searchPokemonName(name: string): void {
